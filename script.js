@@ -13,6 +13,39 @@ if (typeof gsap === 'undefined') {
     const loader = document.getElementById('loader');
     if (loader) loader.style.display = 'none';
     return;
+    // CONTACT FORM CONNECTION
+ const form = document.querySelector("#contactForm");
+
+if (form) {
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = {
+      name: form.querySelector('input[name="name"]').value,
+      email: form.querySelector('input[name="email"]').value,
+      message: form.querySelector('textarea[name="message"]').value
+    };
+
+    try {
+      const response = await fetch("https://portfolio-backend-wt5.onrender.com/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+
+      alert("Message sent successfully!");
+      form.reset();
+
+    } catch (error) {
+      alert("Error sending message");
+      console.error(error);
+    }
+  });
+}
 }
 
 gsap.registerPlugin(ScrollTrigger);
