@@ -46,7 +46,7 @@ if (form) {
     }
   });
 }
-}
+
 
 gsap.registerPlugin(ScrollTrigger);
 
