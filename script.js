@@ -1,54 +1,73 @@
-/* =============================================
-   ANKIT SHARMA PORTFOLIO — script.js
-   IMPROVED VERSION - Performance & Accessibility Optimized
-   ============================================= */
+/* ==========================================
+   ANKIT SHARMA PORTFOLIO - CLEAN VERSION
+========================================== */
 
-// Wait for DOM to be fully loaded before running scripts
-document.addEventListener('DOMContentLoaded', function() {
+/* ==========================================
+   ANKIT SHARMA PORTFOLIO - CLEAN VERSION
+========================================== */
 
-// Check if GSAP is loaded
-if (typeof gsap === 'undefined') {
-    console.error('GSAP library failed to load. Check your internet connection.');
-    // Remove loader to show content even if GSAP fails
-    const loader = document.getElementById('loader');
-    if (loader) loader.style.display = 'none';
-    return;
-    // CONTACT FORM CONNECTION
- const form = document.querySelector("#contactForm");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (form) {
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+  // ==========================================
+  // GSAP SETUP (SAFE VERSION)
+  // ==========================================
 
-    const data = {
-      name: form.querySelector('input[name="name"]').value,
-      email: form.querySelector('input[name="email"]').value,
-      message: form.querySelector('textarea[name="message"]').value
-    };
-
-    try {
-      const response = await fetch("https://portfolio-backend-wt5.onrender.com/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) throw new Error("Submission failed");
-
-      alert("Message sent successfully!");
-      form.reset();
-
-    } catch (error) {
-      alert("Error sending message");
-      console.error(error);
+  if (typeof gsap !== "undefined") {
+    if (typeof ScrollTrigger !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
     }
-  });
-}
+  } else {
+    console.error("GSAP not loaded");
+  }
 
 
-gsap.registerPlugin(ScrollTrigger);
+  // ==========================================
+  // CONTACT FORM CONNECTION
+  // ==========================================
+
+  const form = document.querySelector("#contactForm");
+
+  if (form) {
+    form.addEventListener("submit", async function (e) {
+
+      e.preventDefault();   // Stop page reload
+
+      console.log("Form submitted");
+
+      const data = {
+        name: form.querySelector('input[name="name"]').value,
+        email: form.querySelector('input[name="email"]').value,
+        message: form.querySelector('textarea[name="message"]').value
+      };
+
+      try {
+        const response = await fetch(
+          "https://portfolio-backend-wt5.onrender.com/contact",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Submission failed");
+        }
+
+        alert("Message sent successfully!");
+        form.reset();
+
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error sending message");
+      }
+
+    });
+  }
+
+});
 
 /* ── PARTICLE EXPLOSION EFFECT ── */
 function createParticleExplosion(x, y) {
