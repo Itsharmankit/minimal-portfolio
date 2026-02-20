@@ -94,15 +94,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const nav = document.getElementById('mainNav');
   const pillLinks = document.querySelectorAll('.nav-pill-link');
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-      nav.classList.remove('hero-zone');
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.add('hero-zone');
-      nav.classList.remove('scrolled');
-    }
-  }, { passive: true });
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        nav.classList.remove('hero-zone');
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.add('hero-zone');
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
 
   // Active pill tracks current section via IntersectionObserver
   const sections = document.querySelectorAll('section[id]');
@@ -134,7 +136,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
     function updateProgressBar() {
       const total = document.body.scrollHeight - window.innerHeight;
-      const pct = (window.scrollY / total) * 100;
+      let pct = 0;
+      if (total > 0) {
+        pct = (window.scrollY / total) * 100;
+      }
+      pct = Math.max(0, Math.min(100, pct));
       progressBar.style.width = pct + '%';
       ticking = false;
     }
@@ -182,8 +188,10 @@ document.addEventListener("DOMContentLoaded", function () {
     contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      formStatus.textContent = '';
-      formStatus.className = 'form-status';
+      if (formStatus) {
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+      }
       
       const formData = {
         name: document.getElementById('name') ? document.getElementById('name').value.trim() : '',
@@ -212,8 +220,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
       
       try {
         await simulateFormSubmission(formData);
@@ -223,8 +233,10 @@ document.addEventListener("DOMContentLoaded", function () {
         showFormStatus('Oops! Something went wrong. Please try again or email directly.', 'error');
         console.error('Form submission error:', error);
       } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Get In Touch';
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get In Touch';
+        }
       }
     });
   }
