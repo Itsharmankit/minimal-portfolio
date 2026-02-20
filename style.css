@@ -836,8 +836,8 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .hero-name .line {
     display: block;
-    transform: translateY(0);
-    opacity: 1
+    transform: translateY(80px);
+    opacity: 0
 }
 
 .hero-name .line.serif {
@@ -853,7 +853,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     color: #555; /* Improved contrast */
     max-width: 480px;
     margin: 0 0 24px;
-    opacity: 1;
+    opacity: 0;
     text-align: left
 }
 
@@ -863,7 +863,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     gap: 16px;
     margin-bottom: 28px;
     flex-wrap: wrap;
-    opacity: 1;
+    opacity: 0;
     justify-content: flex-start
 }
 
@@ -885,7 +885,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    opacity: 1;
+    opacity: 0;
     justify-content: flex-start
 }
 
@@ -933,8 +933,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     overflow: hidden;
     border-radius: 8px;
     background: #ffffff;
-    opacity: 1;
-    transform: scale(1)
+    opacity: 0;
+    transform: scale(.95)
 }
 
 .hero-image-box img {
@@ -1013,7 +1013,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     text-transform: uppercase;
     color: var(--gray);
     z-index: 2;
-    opacity: 1
+    opacity: 0
 }
 
 .scroll-line {
