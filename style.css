@@ -635,6 +635,26 @@ nav.scrolled .nav-pill-link:not(.active) {
     animation: float 9s ease-in-out infinite 3s;
 }
 
+.doodle-5 {
+    top: 38%;
+    left: 58%;
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--yellow);
+    opacity: 0.14;
+    animation: float 7s ease-in-out infinite 1.2s;
+}
+
+.doodle-6 {
+    top: 58%;
+    left: 38%;
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--black);
+    opacity: 0.07;
+    animation: float 8s ease-in-out infinite 2.6s;
+}
+
 /* About section doodles - positioned in empty spaces */
 .doodle-about-1 {
     top: 10%;
@@ -2291,7 +2311,7 @@ footer {
 /* ── TABLET: 768px - 900px ── */
 @media(max-width:900px) {
     /* Hide some decorative doodles on smaller screens */
-    .doodle-2, .doodle-3, .doodle-about-2, .doodle-about-3 {
+    .doodle-2, .doodle-3, .doodle-5, .doodle-6, .doodle-about-2, .doodle-about-3 {
         display: none;
     }
 
