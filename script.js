@@ -422,7 +422,7 @@ async function submitForm(data) {
 }
 
 /* ── CUSTOM CURSOR WITH BACKGROUND COLOR DETECTION ── */
-// DISABLED: Removed expensive duplicate cursor system causing performance freeze
-// The primary cursor system (#cursor and #cursorFollower) is sufficient
+/* DISABLED: Removed expensive duplicate cursor system causing performance freeze
+   The primary cursor system (#cursor and #cursorFollower) is sufficient */
 
 }); // End DOMContentLoaded
