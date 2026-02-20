@@ -637,22 +637,21 @@ async function simulateFormSubmission(data) {
 
 // Real-world example with FormSpree (uncomment and add your FormSpree endpoint):
 /*
-async function submitToFormSpree(data) {
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    
-    if (!response.ok) {
-        throw new Error('Form submission failed');
-    }
-    
-    return response.json();
+async function submitForm(data) {
+  const response = await fetch('https://portfollio-backend-wwt5.onrender.com', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!response.ok) {
+    throw new Error('Form submission failed');
+  }
+
+  return response.json();
 }
-*/
 
 /* ── CUSTOM CURSOR WITH BACKGROUND COLOR DETECTION ── */
 const customCursor = document.querySelector('.custom-cursor');
