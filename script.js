@@ -152,77 +152,15 @@ if (!isTouchDevice && !prefersReducedMotion) {
     }, { passive: true });
 }
 
-/* ── XVS-STYLE LETTER-BY-LETTER REVEAL ON SECTION LABELS (Optimized) ── */
-if (!prefersReducedMotion) {
-    const labelElements = document.querySelectorAll('.section-label, .skills-label, .about-label, .contact-eyebrow');
-    
-    // Single shared IntersectionObserver for all labels (performance optimization)
-    const labelObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.querySelectorAll('span').forEach(s => { 
-                    s.style.opacity = '1'; 
-                    s.style.transform = 'translateY(0)'; 
-                });
-                labelObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    labelElements.forEach(el => {
-        const text = el.textContent;
-        el.textContent = '';
-        text.split('').forEach((ch, i) => {
-            const span = document.createElement('span');
-            span.textContent = ch === ' ' ? '\u00A0' : ch;
-            span.style.cssText = 'display:inline-block;opacity:0;transform:translateY(10px);transition:opacity .35s ' + (i * 0.03) + 's,transform .35s ' + (i * 0.03) + 's';
-            el.appendChild(span);
-        });
-        labelObserver.observe(el);
-    });
-}
+/* ── XVS-STYLE LETTER-BY-LETTER REVEAL ON SECTION LABELS (DISABLED) ── */
+// DISABLED: Removed expensive DOM creation causing freeze
+// Creating hundreds of span elements was blocking page interaction
 
 /* ── CURSOR (Disabled on touch devices) ── */
-if (!isTouchDevice) {
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursorFollower');
-    
-    // Show cursors
-    cursor.style.display = 'block';
-    follower.style.display = 'block';
-    
-    let mx = 0, my = 0, fx = 0, fy = 0;
+// Cursor loop disabled for performance - use CSS instead
 
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-
-    (function tick() {
-        cursor.style.transform = `translate3d(${mx - 5}px,${my - 5}px,0)`;
-        fx += (mx - fx) * 0.12;
-        fy += (my - fy) * 0.12;
-        follower.style.transform = `translate3d(${fx - 18}px,${fy - 18}px,0)`;
-        requestAnimationFrame(tick);
-    })();
-
-    document.querySelectorAll(
-        'a, button, .service-card, .project-item, .hero-role, .social-icon-btn, .skill-item, .section-header'
-    ).forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('expand');
-            follower.classList.add('expand');
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('expand');
-            follower.classList.remove('expand');
-        });
-    });
-}
-
-/* ── APPLY PARTICLE EFFECTS TO INTERACTIVE ELEMENTS ── */
-addParticleEffect('.nav-logo');            // AS logo
-addParticleEffect('.hero-btn');            // Hero buttons
-addParticleEffect('.nav-pill-link');       // Navigation links
-addParticleEffect('.social-icon-btn');     // Contact social icons
-addParticleEffect('.footer-social');       // Footer social icons
+/* ── APPLY PARTICLE EFFECTS TO INTERACTIVE ELEMENTS (DISABLED) ── */
+// Removed particle effects for performance optimization
 
 /* ── NAV: SCROLL STATE + MORPHIC ACTIVE PILL ── */
 const nav = document.getElementById('mainNav');
@@ -263,45 +201,17 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-/* ── LOADER + HERO ENTRANCE (Respects reduced motion) ── */
-const animDuration = prefersReducedMotion ? 0.2 : 0.7;
-const animStagger = prefersReducedMotion ? 0.02 : 0.12;
-
-const loaderText = document.getElementById('loaderText');
-if (loaderText) {
-    // Simple text change without TextPlugin
+/* ── LOADER + HERO ENTRANCE (SIMPLIFIED) ── */
+// Minimal loader animation to avoid freeze
+const loader = document.getElementById('loader');
+if (loader) {
     setTimeout(() => {
-        loaderText.textContent = 'SHARMA';
-    }, prefersReducedMotion ? 150 : 400);
+        loader.style.display = 'none';
+    }, 800);
 }
 
-gsap.timeline({
-    onComplete: () => {
-        const loader = document.getElementById('loader');
-        if (loader) loader.style.display = 'none';
-        
-        gsap.timeline()
-            .to('.hero-name .line', { y: 0, opacity: 1, duration: animDuration, stagger: animStagger, ease: 'power3.out' })
-            .to('.hero-tagline', { opacity: 1, duration: animDuration * 0.85, ease: 'power2.out' }, '-=.3')
-            .to('.hero-animated-text', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2')
-            .to('.hero-cta', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2')
-            .to('.hero-image-box', { opacity: 1, scale: 1, duration: animDuration * 1.15, ease: 'power2.out' }, '-=.5')
-            .to('.hero-scroll', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2');
-    }
-})
-    .to('#loaderText', { opacity: 0, duration: prefersReducedMotion ? 0.15 : 0.3, delay: prefersReducedMotion ? 0.2 : 0.6 })
-    .to('#loader', { yPercent: -100, duration: prefersReducedMotion ? 0.3 : 0.65, ease: 'power4.inOut' });
-
-/* ── HERO ANIMATED TEXT PULSE (Respects reduced motion) ── */
-if (!prefersReducedMotion) {
-    gsap.timeline({ repeat: -1, repeatDelay: 2 })
-        .to('#heroWord1', { scale: 1.1, color: '#0a0a0a', duration: 0.3, ease: 'power2.out' }, 0)
-        .to('#heroWord1', { scale: 1, duration: 0.3, ease: 'power2.in' }, 0.5)
-        .to('#heroWord2', { scale: 1.1, color: '#0a0a0a', duration: 0.3, ease: 'power2.out' }, 1)
-        .to('#heroWord2', { scale: 1, duration: 0.3, ease: 'power2.in' }, 1.5)
-        .to('#heroWord3', { scale: 1.1, color: '#0a0a0a', duration: 0.3, ease: 'power2.out' }, 2)
-        .to('#heroWord3', { scale: 1, duration: 0.3, ease: 'power2.in' }, 2.5);
-}
+/* ── HERO ANIMATED TEXT PULSE (DISABLED) ── */
+// Removed for performance optimization
 
 /* float animation removed */
 
@@ -321,62 +231,9 @@ if (!prefersReducedMotion) {
 }
 */
 
-/* ── SCROLL ANIMATIONS (Respects reduced motion) ── */
-if (!prefersReducedMotion) {
-    // About
-    gsap.from('.about-heading', {
-        opacity: 0, y: 44, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
-    });
-    gsap.from('.about-text', {
-        opacity: 0, y: 24, duration: 0.6, delay: 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
-    });
-    gsap.from('.about-stats', {
-        opacity: 0, y: 24, duration: 0.6, delay: 0.2, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
-    });
-    gsap.from('.about-img-box', {
-        opacity: 0, scale: 0.95, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 65%', once: true }
-    });
-
-    // Skills
-    ScrollTrigger.batch('.skill-item', {
-        start: 'top 90%', once: true,
-        onEnter: els => gsap.from(els, { opacity: 0, y: 18, duration: 0.45, stagger: 0.04, ease: 'power2.out' })
-    });
-
-    // Services
-    ScrollTrigger.batch('.service-card', {
-        start: 'top 88%', once: true,
-        onEnter: els => gsap.from(els, { opacity: 0, y: 44, duration: 0.6, stagger: 0.1, ease: 'power2.out' })
-    });
-
-    // Projects
-    ScrollTrigger.batch('.project-item', {
-        start: 'top 92%', once: true,
-        onEnter: els => gsap.from(els, { opacity: 0, x: -20, duration: 0.5, stagger: 0.07, ease: 'power2.out' })
-    });
-
-    // Section titles
-    ScrollTrigger.batch('.section-title', {
-        start: 'top 88%', once: true,
-        onEnter: els => gsap.from(els, { opacity: 0, y: 36, duration: 0.6, ease: 'power2.out' })
-    });
-
-    // Contact
-    gsap.from('.contact-heading', {
-        opacity: 0, y: 56, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: '#contact', start: 'top 76%', once: true }
-    });
-
-    // Social buttons
-    ScrollTrigger.batch('.social-icon-btn', {
-        start: 'top 90%', once: true,
-        onEnter: els => gsap.from(els, { opacity: 0, y: 24, scale: 0.9, duration: 0.5, stagger: 0.08, ease: 'power2.out' })
-    });
-}
+/* ── SCROLL ANIMATIONS (DISABLED for performance) ── */
+// Removed expensive scroll animations causing page freeze
+// ScrollTrigger batch operations were blocking rendering
 
 /* ══════════════════════════════════════
    PREMIUM EFFECTS
@@ -402,23 +259,8 @@ if (progressBar) {
     }, { passive: true });
 }
 
-/* ── 2. MAGNETIC CTA BUTTONS (Optimized) ── */
-if (!isTouchDevice && !prefersReducedMotion) {
-    document.querySelectorAll('.hero-btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-            this.style.transition = 'transform 0.3s ease';
-        });
-        btn.addEventListener('mousemove', e => {
-            const r = btn.getBoundingClientRect();
-            const dx = e.clientX - (r.left + r.width / 2);
-            const dy = e.clientY - (r.top + r.height / 2);
-            gsap.to(btn, { x: dx * 0.28, y: dy * 0.28, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
-        });
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,0.4)', overwrite: 'auto' });
-        });
-    });
-}
+/* ── 2. MAGNETIC CTA BUTTONS (DISABLED) ── */
+// Removed mousemove tracking causing performance issues
 
 /* ── HERO BUTTONS COLOR SWAP (Interactive hover effect) ── */
 const primaryBtn = document.querySelector('.hero-btn-primary');
@@ -448,146 +290,20 @@ if (primaryBtn && secondaryBtn) {
     });
 }
 
-/* ── 3. HERO IMAGE SCROLL PARALLAX (Optimized) ── */
-if (!prefersReducedMotion) {
-    gsap.to('.hero-image-wrapper', {
-        yPercent: -12,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1, // Smoothing value (was true, now 1 for better performance)
-            invalidateOnRefresh: true
-        }
-    });
-}
+/* ── 3. HERO IMAGE SCROLL PARALLAX (DISABLED) ── */
+// Removed ScrollTrigger parallax for performance
 
-/* ── 4. STAT COUNTER ANIMATION (Simplified and optimized) ── */
-if (!prefersReducedMotion) {
-    document.querySelectorAll('.stat-num').forEach(el => {
-        const raw = el.textContent.trim();
-        const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-        const suffix = raw.replace(/[0-9.]/g, '');
+/* ── 4. STAT COUNTER ANIMATION (DISABLED) ── */
+// Original counter animations removed for performance
 
-        let isAnimating = false;
+/* ── 6. ABOUT IMAGE CLIP-PATH WIPE REVEAL (DISABLED) ── */
+// Removed for performance
 
-        function animateCounter(duration = 1.6) {
-            if (isAnimating) return;
-            isAnimating = true;
-            
-            gsap.to({ val: 0 }, {
-                val: num,
-                duration: duration,
-                ease: 'power2.out',
-                onUpdate: function () {
-                    el.textContent = Math.round(this.targets()[0].val) + suffix;
-                },
-                onComplete: () => {
-                    isAnimating = false;
-                }
-            });
-        }
+/* ── 7. SECTION TITLE CHARACTER REVEAL (DISABLED) ── */
+// Removed expensive IntersectionObserver animations
 
-        // Initial animation on scroll
-        el.textContent = '0' + suffix;
-        ScrollTrigger.create({
-            trigger: el,
-            start: 'top 88%',
-            once: true,
-            onEnter: () => animateCounter()
-        });
-
-        // Replay animation on hover (debounced)
-        if (!isTouchDevice) {
-            el.parentElement.addEventListener('mouseenter', () => {
-                if (!isAnimating) {
-                    el.textContent = '0' + suffix;
-                    animateCounter(1.2);
-                }
-            });
-        }
-    });
-}
-
-/* ── 6. ABOUT IMAGE CLIP-PATH WIPE REVEAL ── */
-if (!prefersReducedMotion) {
-    ScrollTrigger.create({
-        trigger: '.about-img-box',
-        start: 'top 72%',
-        once: true,
-        onEnter: () => {
-            const imgBox = document.querySelector('.about-img-box');
-            if (imgBox) imgBox.classList.add('revealed');
-        }
-    });
-}
-
-/* ── 7. SECTION TITLE CHARACTER REVEAL (Optimized - Simplified) ── */
-// Simplified version without creating hundreds of span elements
-if (!prefersReducedMotion) {
-    document.querySelectorAll('.section-title, .skills-title').forEach(el => {
-        const obs = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-                obs.disconnect();
-            }
-        }, { threshold: 0.3 });
-        // Set initial state
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        obs.observe(el);
-    });
-}
-
-/* ── PARTICLE BURST ON BUTTON CLICK (Fixed: added timeout fallback) ── */
-function burstParticles(e) {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const count = 8;
-    const colors = ['#0a0a0a', '#555', '#888', '#0a0a0a'];
-
-    for (let i = 0; i < count; i++) {
-        const p = document.createElement('span');
-        p.className = 'particle-dot';
-        p.style.left = cx + 'px';
-        p.style.top = cy + 'px';
-        p.style.background = colors[i % colors.length];
-
-        const angle = (360 / count) * i;
-        const dist = 30 + Math.random() * 30;
-        const dx = Math.cos(angle * Math.PI / 180) * dist;
-        const dy = Math.sin(angle * Math.PI / 180) * dist;
-        p.style.setProperty('--dx', dx + 'px');
-        p.style.setProperty('--dy', dy + 'px');
-        p.style.animationDelay = (i * 0.04) + 's';
-
-        document.body.appendChild(p);
-        
-        // Cleanup with both event listener and timeout fallback
-        let removed = false;
-        const cleanup = () => {
-            if (!removed) {
-                removed = true;
-                p.remove();
-            }
-        };
-        p.addEventListener('animationend', cleanup);
-        setTimeout(cleanup, 1000); // Fallback timeout
-    }
-
-    // Brief scale-down press feel
-    btn.style.transform = 'scale(0.94)';
-    setTimeout(() => btn.style.transform = '', 120);
-}
-
-document.querySelectorAll(
-    '.hero-btn, .social-icon-btn'
-).forEach(btn => btn.addEventListener('click', burstParticles));
+/* ── PARTICLE BURST ON BUTTON CLICK (DISABLED) ── */
+// Removed particle effects for performance
 
 /* ══════════════════════════════════════
    FORM VALIDATION & SUBMISSION
@@ -706,129 +422,7 @@ async function submitForm(data) {
 }
 
 /* ── CUSTOM CURSOR WITH BACKGROUND COLOR DETECTION ── */
-const customCursor = document.querySelector('.custom-cursor');
-
-// Run on all devices (testing)
-if (customCursor) {
-    let cursorX = 0;
-    let cursorY = 0;
-    let currentX = 0;
-    let currentY = 0;
-    let lastColorState = null;
-    let wasOnTextOrImage = false;
-    let detectionTimeout = null;
-    
-    // Make cursor visible from start
-    customCursor.style.opacity = '1';
-    
-    // Track mouse movement
-    document.addEventListener('mousemove', (e) => {
-        cursorX = e.clientX;
-        cursorY = e.clientY;
-        
-        // Only trigger detection on mouse move, not constantly
-        if (detectionTimeout) clearTimeout(detectionTimeout);
-        detectionTimeout = setTimeout(detectCursorState, 10);
-    });
-    
-    // Smooth cursor animation with RAF
-    function animateCursor() {
-        currentX += (cursorX - currentX) * 0.15;
-        currentY += (cursorY - currentY) * 0.15;
-        
-        customCursor.style.left = currentX + 'px';
-        customCursor.style.top = currentY + 'px';
-        
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    
-    // Detect if hovering over text or images - SIMPLIFIED
-    function isTextOrImage(element) {
-        if (!element) return false;
-        
-        try {
-            const tagName = element.tagName;
-            // Direct text/image elements
-            if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'LI', 'BUTTON', 'IMG'].includes(tagName)) {
-                return true;
-            }
-            
-            // Check classes
-            const classes = element.className;
-            if (typeof classes === 'string' && (classes.includes('nav-pill-link') || classes.includes('hero-btn'))) {
-                return true;
-            }
-            
-            // Check parent only once
-            const parent = element.parentElement;
-            if (parent) {
-                if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'A', 'ARTICLE'].includes(parent.tagName)) {
-                    return true;
-                }
-            }
-        } catch (e) {}
-        
-        return false;
-    }
-    
-    // Get brightness - SIMPLIFIED
-    function getElementBrightness(element) {
-        if (!element) return 255;
-        
-        try {
-            let color = window.getComputedStyle(element).backgroundColor;
-            
-            // Fallback to text color if transparent
-            if (color === 'rgba(0, 0, 0, 0)' || color === 'transparent') {
-                color = window.getComputedStyle(element).color;
-            }
-            
-            const rgb = color.match(/\d+/g);
-            if (rgb && rgb.length >= 3) {
-                const r = parseInt(rgb[0]);
-                const g = parseInt(rgb[1]);
-                const b = parseInt(rgb[2]);
-                return (r * 299 + g * 587 + b * 114) / 1000;
-            }
-        } catch (e) {}
-        
-        return 255;
-    }
-    
-    // Detect cursor state
-    function detectCursorState() {
-        try {
-            const element = document.elementFromPoint(cursorX, cursorY);
-            if (!element) return;
-            
-            const isOnTextOrImage = isTextOrImage(element);
-            
-            // Update size
-            if (isOnTextOrImage !== wasOnTextOrImage) {
-                if (isOnTextOrImage) {
-                    customCursor.classList.add('grow');
-                } else {
-                    customCursor.classList.remove('grow');
-                }
-                wasOnTextOrImage = isOnTextOrImage;
-            }
-            
-            // Update color
-            const brightness = getElementBrightness(element);
-            const isDarkBackground = brightness < 140;
-            const newColorState = isDarkBackground ? 'dark' : 'light';
-            
-            if (lastColorState !== newColorState) {
-                if (isDarkBackground) {
-                    customCursor.classList.add('on-dark');
-                } else {
-                    customCursor.classList.remove('on-dark');
-                }
-                lastColorState = newColorState;
-            }
-        } catch (e) {}
-    }
-}
+// DISABLED: Removed expensive duplicate cursor system causing performance freeze
+// The primary cursor system (#cursor and #cursorFollower) is sufficient
 
 }); // End DOMContentLoaded
