@@ -3056,7 +3056,8 @@ footer {
 }
 
 /* ── CUSTOM CURSOR ── */
-* {
+body.cursor-active,
+body.cursor-active * {
     cursor: none !important;
 }
 

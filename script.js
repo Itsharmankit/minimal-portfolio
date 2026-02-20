@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("✓ GSAP and ScrollTrigger loaded successfully");
     } else {
       console.warn("GSAP or ScrollTrigger not available - using fallback animations");
-      // Fallback: Show elements using CSS animations
-      document.documentElement.style.setProperty('--gsap-failed', 'true');
     }
 
     // ==========================================
@@ -65,51 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==========================================
-    // CONTACT FORM CONNECTION
-    // ==========================================
 
-    const form = document.querySelector("#contactForm");
-
-  if (form) {
-    form.addEventListener("submit", async function (e) {
-
-      e.preventDefault();   // Stop page reload
-
-      console.log("Form submitted");
-
-      const data = {
-        name: form.querySelector('input[name="name"]').value,
-        email: form.querySelector('input[name="email"]').value,
-        message: form.querySelector('textarea[name="message"]').value
-      };
-
-      try {
-        const response = await fetch(
-          "https://portfolio-backend-wt5.onrender.com/contact",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Submission failed");
-        }
-
-        alert("Message sent successfully!");
-        form.reset();
-
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Error sending message");
-      }
-
-    });
-  }
 
   // ==========================================
   // DETECT MOBILE/TOUCH DEVICES
@@ -173,6 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (cursor && follower) {
       cursor.style.display = 'block';
       follower.style.display = 'block';
+      
+      // Add cursor-active class to enable cursor: none on body
+      document.body.classList.add('cursor-active');
       
       let mx = 0, my = 0, fx = 0, fy = 0;
 
@@ -658,7 +615,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       
       try {
-        await simulateFormSubmission(formData);
+        await submitContactForm(formData);
         showFormStatus('Message sent successfully! I\'ll get back to you soon.', 'success');
         contactForm.reset();
       } catch (error) {
@@ -685,17 +642,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  async function simulateFormSubmission(data) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (Math.random() > 0.1) {
-          console.log('Form data:', data);
-          resolve();
-        } else {
-          reject(new Error('Simulated network error'));
-        }
-      }, 1500);
-    });
+  async function submitContactForm(data) {
+    const response = await fetch(
+      'https://portfolio-backend-wt5.onrender.com/contact',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Submission failed: ${response.status} ${errorText}`);
+    }
+
+    return await response.json();
   }
 
   } // End initializePortfolio function
