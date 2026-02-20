@@ -8,24 +8,68 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ==========================================
-  // GSAP SETUP (SAFE VERSION)
-  // ==========================================
-
-  if (typeof gsap !== "undefined") {
-    if (typeof ScrollTrigger !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger);
+  // Wait for GSAP to be available
+  function waitForGSAP(callback, attempts = 0) {
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+      callback();
+    } else if (attempts < 50) {
+      setTimeout(() => waitForGSAP(callback, attempts + 1), 100);
+    } else {
+      console.error("GSAP failed to load after 5 seconds");
+      callback(); // Continue anyway with limited functionality
     }
-  } else {
-    console.error("GSAP not loaded");
   }
 
+  waitForGSAP(initializePortfolio);
 
-  // ==========================================
-  // CONTACT FORM CONNECTION
-  // ==========================================
+  function initializePortfolio() {
+    // ==========================================
+    // GSAP SETUP (SAFE VERSION)
+    // ==========================================
 
-  const form = document.querySelector("#contactForm");
+    const gsapAvailable = typeof gsap !== "undefined";
+    const scrollTriggerAvailable = typeof ScrollTrigger !== "undefined";
+
+    if (gsapAvailable && scrollTriggerAvailable) {
+      gsap.registerPlugin(ScrollTrigger);
+      console.log("✓ GSAP and ScrollTrigger loaded successfully");
+    } else {
+      console.warn("GSAP or ScrollTrigger not available - using fallback animations");
+      // Fallback: Show elements using CSS animations
+      document.documentElement.style.setProperty('--gsap-failed', 'true');
+    }
+
+    // ==========================================
+    // SHOW CURSOR AS FALLBACK
+    // ==========================================
+    const isTouchDevice2 = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (!isTouchDevice2) {
+      const cursor = document.getElementById('cursor');
+      const follower = document.getElementById('cursorFollower');
+      if (cursor) cursor.style.display = 'block';
+      if (follower) follower.style.display = 'block';
+      console.log("✓ Cursor elements shown");
+    }
+
+    // ==========================================
+    // HIDE LOADER AFTER DELAY IF GSAP NOT AVAILABLE
+    // ==========================================
+    if (!gsapAvailable) {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          loader.style.display = 'none';
+          console.log("✓ Loader hidden (fallback)");
+        }
+      }, 2000);
+    }
+
+
+    // ==========================================
+    // CONTACT FORM CONNECTION
+    // ==========================================
+
+    const form = document.querySelector("#contactForm");
 
   if (form) {
     form.addEventListener("submit", async function (e) {
@@ -82,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── HERO MOUSE PARALLAX ── */
-  if (!isTouchDevice && !prefersReducedMotion) {
+  if (!isTouchDevice && !prefersReducedMotion && gsapAvailable) {
     document.addEventListener('mousemove', e => {
       const rx = (e.clientX / window.innerWidth - 0.5) * 12;
       const ry = (e.clientY / window.innerHeight - 0.5) * 12;
@@ -159,6 +203,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ── PARTICLE EXPLOSION EFFECT ── */
   function createParticleExplosion(x, y) {
+    if (!gsapAvailable) return;
+    
     const particleCount = 8;
     const colors = ['var(--black)', 'var(--white)', '#FFD700', '#FFA500', '#666'];
     
@@ -191,6 +237,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ── ADD PARTICLE EFFECT TO ELEMENTS ── */
   function addParticleEffect(selector) {
+    if (!gsapAvailable) return;
+    
     const elements = document.querySelectorAll(selector);
     elements.forEach(element => {
       element.addEventListener('click', function(e) {
@@ -219,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
   addParticleEffect('.footer-social');
 
   /* ── SCROLL ANIMATIONS ── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && gsapAvailable && scrollTriggerAvailable) {
     gsap.from('.about-heading', {
       opacity: 0, y: 44, duration: 0.7, ease: 'power2.out',
       scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
@@ -269,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── STAT COUNTER ANIMATION ── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && gsapAvailable && scrollTriggerAvailable) {
     document.querySelectorAll('.stat-num').forEach(el => {
       const raw = el.textContent.trim();
       const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
@@ -314,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── HERO IMAGE SCROLL PARALLAX ── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && gsapAvailable && scrollTriggerAvailable) {
     gsap.to('.hero-image-wrapper', {
       yPercent: -12,
       ease: 'none',
@@ -329,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── ABOUT IMAGE CLIP-PATH WIPE REVEAL ── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && scrollTriggerAvailable) {
     ScrollTrigger.create({
       trigger: '.about-img-box',
       start: 'top 72%',
@@ -359,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── MAGNETIC CTA BUTTONS ── */
-  if (!isTouchDevice && !prefersReducedMotion) {
+  if (!isTouchDevice && !prefersReducedMotion && gsapAvailable) {
     document.querySelectorAll('.hero-btn').forEach(btn => {
       btn.addEventListener('mouseenter', function() {
         this.style.transition = 'transform 0.3s ease';
@@ -377,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── HERO ANIMATED TEXT PULSE ── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && gsapAvailable) {
     gsap.timeline({ repeat: -1, repeatDelay: 2 })
       .to('#heroWord1', { scale: 1.1, color: '#0a0a0a', duration: 0.3, ease: 'power2.out' }, 0)
       .to('#heroWord1', { scale: 1, duration: 0.3, ease: 'power2.in' }, 0.5)
@@ -443,22 +491,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }, prefersReducedMotion ? 150 : 400);
   }
 
-  gsap.timeline({
-    onComplete: () => {
+  if (gsapAvailable) {
+    gsap.timeline({
+      onComplete: () => {
+        const loader = document.getElementById('loader');
+        if (loader) loader.style.display = 'none';
+        
+        gsap.timeline()
+          .to('.hero-name .line', { y: 0, opacity: 1, duration: animDuration, stagger: animStagger, ease: 'power3.out' })
+          .to('.hero-tagline', { opacity: 1, duration: animDuration * 0.85, ease: 'power2.out' }, '-=.3')
+          .to('.hero-animated-text', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2')
+          .to('.hero-cta', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2')
+          .to('.hero-image-box', { opacity: 1, scale: 1, duration: animDuration * 1.15, ease: 'power2.out' }, '-=.5')
+          .to('.hero-scroll', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2');
+      }
+    })
+      .to('#loaderText', { opacity: 0, duration: prefersReducedMotion ? 0.15 : 0.3, delay: prefersReducedMotion ? 0.2 : 0.6 })
+      .to('#loader', { yPercent: -100, duration: prefersReducedMotion ? 0.3 : 0.65, ease: 'power4.inOut' });
+  } else {
+    // Fallback: Hide loader and show hero elements without GSAP
+    setTimeout(() => {
       const loader = document.getElementById('loader');
       if (loader) loader.style.display = 'none';
       
-      gsap.timeline()
-        .to('.hero-name .line', { y: 0, opacity: 1, duration: animDuration, stagger: animStagger, ease: 'power3.out' })
-        .to('.hero-tagline', { opacity: 1, duration: animDuration * 0.85, ease: 'power2.out' }, '-=.3')
-        .to('.hero-animated-text', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2')
-        .to('.hero-cta', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2')
-        .to('.hero-image-box', { opacity: 1, scale: 1, duration: animDuration * 1.15, ease: 'power2.out' }, '-=.5')
-        .to('.hero-scroll', { opacity: 1, duration: animDuration * 0.7, ease: 'power2.out' }, '-=.2');
-    }
-  })
-    .to('#loaderText', { opacity: 0, duration: prefersReducedMotion ? 0.15 : 0.3, delay: prefersReducedMotion ? 0.2 : 0.6 })
-    .to('#loader', { yPercent: -100, duration: prefersReducedMotion ? 0.3 : 0.65, ease: 'power4.inOut' });
+      // Show hero elements immediately (CSS animations will handle the rest)
+      document.querySelectorAll('.hero-name .line, .hero-tagline, .hero-animated-text, .hero-cta, .hero-image-box, .hero-scroll').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }, 1500);
+  }
 
   /* ── NAV: SCROLL STATE + MORPHIC ACTIVE PILL ── */
   const nav = document.getElementById('mainNav');
@@ -635,5 +697,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1500);
     });
   }
+
+  } // End initializePortfolio function
 
 }); // End DOMContentLoaded
