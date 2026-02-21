@@ -1400,12 +1400,14 @@ nav.scrolled .nav-pill-link:not(.active) {
     width: 100%;
     background: transparent;
     border: none;
-    overflow: visible
+    overflow: visible;
+    aspect-ratio: 1;
 }
 
-.about-illustration-img {
+.about-illustration-img,
+.about-img-box video {
     width: 100%;
-    max-width: 520px;
+    max-width: 800px;
     height: auto;
     object-fit: contain;
     object-position: center;
