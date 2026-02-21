@@ -2607,12 +2607,12 @@ footer {
     }
 
     .nav-left {
-        width: calc(50% - 65px);
+        width: calc(50% - 85px);
         justify-content: flex-start
     }
 
     .nav-right {
-        width: calc(50% - 65px);
+        width: calc(50% - 85px);
         justify-content: flex-end
     }
 
