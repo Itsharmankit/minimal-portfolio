@@ -16,7 +16,7 @@ if (typeof gsap === 'undefined') {
     // Remove loader to show content even if GSAP fails
     const loader = document.getElementById('loader');
     if (loader) loader.style.display = 'none';
-    document.querySelectorAll('.hero-tagline, .hero-animated-text, .hero-cta, .hero-name .line').forEach(el => {
+    document.querySelectorAll('.hero-tagline, .hero-animated-text, .hero-cta, .hero-name .line, .hero-image-box, .hero-scroll').forEach(el => {
         el.style.opacity = '1';
         el.style.visibility = 'visible';
         el.style.transform = 'none';
@@ -561,8 +561,10 @@ if (contactForm) {
         e.preventDefault();
         
         // Clear previous status
-        formStatus.textContent = '';
-        formStatus.className = 'form-status';
+        if (formStatus) {
+            formStatus.textContent = '';
+            formStatus.className = 'form-status';
+        }
         
         // Get form data
         const formData = {
