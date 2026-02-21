@@ -2570,9 +2570,7 @@ footer {
         left: 50%;
         transform: translateX(-50%);
         box-shadow: none;
-        border-width: 1.5px;
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px)
+        border-width: 1.5px
     }
 
     .nav-logo:hover {
@@ -2592,14 +2590,14 @@ footer {
     }
 
     .nav-group {
-        gap: 12px;
+        gap: 14px;
         white-space: nowrap;
         flex: 0 0 auto
     }
 
     .nav-left,
     .nav-right {
-        width: calc(50% - 24px)
+        width: calc(50% - 28px)
     }
 
     .nav-left {
