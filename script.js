@@ -260,7 +260,8 @@ let ticking = false;
 window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
     const isMobile = window.innerWidth <= 768;
-    const scrollThreshold = isMobile ? 50 : 100;
+    const scrollThreshold = isMobile ? 30 : 100;
+    const scrollDelta = Math.abs(currentScrollY - lastScrollY);
     
     if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -274,14 +275,19 @@ window.addEventListener('scroll', () => {
             }
             
             // Show navbar on scroll down, hide on scroll up
-            if (currentScrollY < lastScrollY && currentScrollY > scrollThreshold) {
-                // Scrolling up
-                nav.classList.add('nav-hidden');
-            } else if (currentScrollY > scrollThreshold) {
-                // Scrolling down
-                nav.classList.remove('nav-hidden');
-            } else {
-                // At top of page
+            // Only trigger if scrolled more than 5px (prevent micro-scrolls)
+            if (scrollDelta > 5) {
+                if (currentScrollY < lastScrollY && currentScrollY > scrollThreshold) {
+                    // Scrolling up
+                    nav.classList.add('nav-hidden');
+                } else if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+                    // Scrolling down
+                    nav.classList.remove('nav-hidden');
+                }
+            }
+            
+            // Always show at top
+            if (currentScrollY <= scrollThreshold) {
                 nav.classList.remove('nav-hidden');
             }
             
