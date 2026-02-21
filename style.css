@@ -804,9 +804,9 @@ nav.scrolled .nav-pill-link:not(.active) {
     white-space: nowrap;
 }
 
-/* Ankit Sharma — Patung stylized script with shimmer */
+/* Ankit Sharma — Satisfy handwritten script with shimmer */
 .hero-script-name {
-    font-family: 'Patung', cursive;
+    font-family: 'Satisfy', cursive;
     font-style: normal;
     font-weight: 400;
     font-size: clamp(48px, 8vw, 120px);
