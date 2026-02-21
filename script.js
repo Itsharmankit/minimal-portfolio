@@ -158,6 +158,17 @@ if (!isTouchDevice) {
 
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
 
+        function getBackgroundBrightness(element) {
+            const bgColor = window.getComputedStyle(element).backgroundColor;
+            if (!bgColor || bgColor === 'rgba(0, 0, 0, 0)') return 255;
+            
+            const rgb = bgColor.match(/\d+/g);
+            if (!rgb || rgb.length < 3) return 255;
+            
+            const brightness = (parseInt(rgb[0]) + parseInt(rgb[1]) + parseInt(rgb[2])) / 3;
+            return brightness;
+        }
+
         function isTextOrImage(element) {
             if (!element) return false;
 
@@ -174,6 +185,14 @@ if (!isTouchDevice) {
             const tagName = element.tagName;
             if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'LI', 'BUTTON', 'IMG', 'SVG', 'PATH'].includes(tagName)) {
                 return true;
+            }
+
+            // Check for dark backgrounds (projects with black background)
+            if (element.closest('.project-card, .project-box')) {
+                const brightness = getBackgroundBrightness(element);
+                if (brightness < 128) {
+                    return true;
+                }
             }
 
             return false;
