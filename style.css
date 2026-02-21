@@ -2550,41 +2550,27 @@ footer {
     }
 }
 
-/* ===== MOBILE NAVBAR FIX ===== */
-@media (max-width: 768px) {
+/* ── MOBILE: 540px - 768px ── */
+@media(max-width:768px) {
+    nav {
+        padding: 16px 20px;
+        min-height: auto;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        display: flex;
+        position: relative
+    }
 
-  nav {
-    display: flex;
-    align-items: center;          /* Perfect vertical center */
-    justify-content: space-between;
-    height: 60px;                 /* Clean fixed height */
-    padding: 0 16px;
-    background: #fff;
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 42px;
-    width: 42px;
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
-    position: relative;           /* Important: NOT absolute */
-    transform: none;
-    box-shadow: none;
-  }
-
-  nav ul {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-
-}
+    .nav-logo {
+        font-size: 20px;
+        padding: 4px 8px;
+        margin: 0;
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border-width: 1.5px
+    }
 
     .nav-logo:hover {
         transform: none;
@@ -2592,41 +2578,34 @@ footer {
     }
 
     .nav-pill {
-        background: transparent;
-        border: 0;
-        padding: 0;
-        gap: 0;
+        background: rgba(10, 10, 10, 0.06);
+        border: 1px solid rgba(10, 10, 10, 0.10);
+        padding: 4px;
+        gap: 6px;
         display: flex;
-        width: 100%;
+        width: auto;
         align-items: center;
-        justify-content: space-between
+        border-radius: 14px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px)
     }
 
     .nav-group {
-        gap: 14px;
+        gap: 2px;
         white-space: nowrap;
-        flex: 0 0 auto
-    }
-
-    .nav-left,
-    .nav-right {
-        flex: 1
-    }
-
-    .nav-left {
-        justify-content: flex-start
-    }
-
-    .nav-right {
-        justify-content: flex-end
+        flex: 0 0 auto;
+        display: flex
     }
 
     .nav-pill-link {
         width: auto;
-        padding: 0;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        border-radius: 0
+        padding: 7px 14px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center
     }
 
     .nav-pill-link[data-section="Home"] {
@@ -2639,7 +2618,10 @@ footer {
         -webkit-backdrop-filter: blur(8px);
         box-shadow: 0 6px 24px rgba(10, 10, 10, 0.12)
     }
+}
 
+/* ── MOBILE HERO AND SECTIONS ── */
+@media(max-width:768px) {
     #Home {
         padding: 78px 16px 48px;
         gap: 20px
