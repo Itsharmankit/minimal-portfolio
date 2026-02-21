@@ -32,25 +32,25 @@
     }
 }
 
-/* Fallback animation if GSAP takes too long */
-.hero-name .line {
+/* Fallback animation when JavaScript is disabled */
+.no-js .hero-name .line {
     animation: fadeInUp 0.8s ease 3s forwards;
 }
 
-.hero-tagline {
-    animation: fadeInUp 0.8s ease 3.3s forwards !important;
+.no-js .hero-tagline {
+    animation: fadeInUp 0.8s ease 3.3s forwards;
 }
 
-.hero-animated-text {
-    animation: fadeInUp 0.8s ease 3.2s forwards !important;
+.no-js .hero-animated-text {
+    animation: fadeInUp 0.8s ease 3.2s forwards;
 }
 
-.hero-cta {
-    animation: fadeInUp 0.8s ease 3.2s forwards !important;
+.no-js .hero-cta {
+    animation: fadeInUp 0.8s ease 3.2s forwards;
 }
 
-.hero-image-box {
-    animation: fadeInUp 0.8s ease 3.4s forwards !important;
+.no-js .hero-image-box {
+    animation: fadeInUp 0.8s ease 3.4s forwards;
 }
 
 /* ── MOBILE & TOUCH OPTIMIZATIONS ── */
@@ -76,17 +76,6 @@ a, button, .hero-btn, .nav-pill-link, .social-icon-btn, .footer-social {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
-}
-
-/* Smooth scroll for all */
-html {
-    scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
 }
 
 /* ── GEOMETRIC HERO PATTERN (removed) ── */

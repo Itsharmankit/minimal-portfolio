@@ -2,9 +2,9 @@
    ANKIT SHARMA PORTFOLIO - CLEAN VERSION
 ========================================== */
 
-/* ==========================================
-   ANKIT SHARMA PORTFOLIO - CLEAN VERSION
-========================================== */
+// Configuration constants
+const API_BASE_URL = 'https://portfolio-backend-wt5.onrender.com';
+const API_TIMEOUT = 30000; // 30 seconds
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (attempts < 50) {
       setTimeout(() => waitForGSAP(callback, attempts + 1), 100);
     } else {
-      console.error("GSAP failed to load after 5 seconds");
-      callback(); // Continue anyway with limited functionality
+      // GSAP failed to load - continue with fallback animations
+      callback();
     }
   }
 
@@ -32,9 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (gsapAvailable && scrollTriggerAvailable) {
       gsap.registerPlugin(ScrollTrigger);
-      console.log("✓ GSAP and ScrollTrigger loaded successfully");
-    } else {
-      console.warn("GSAP or ScrollTrigger not available - using fallback animations");
     }
 
     // ==========================================
@@ -46,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const follower = document.getElementById('cursorFollower');
       if (cursor) cursor.style.display = 'block';
       if (follower) follower.style.display = 'block';
-      console.log("✓ Cursor elements shown");
     }
 
     // ==========================================
@@ -57,13 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const loader = document.getElementById('loader');
         if (loader) {
           loader.style.display = 'none';
-          console.log("✓ Loader hidden (fallback)");
         }
       }, 2000);
     }
-
-
-
 
   // ==========================================
   // DETECT MOBILE/TOUCH DEVICES
@@ -189,6 +181,13 @@ document.addEventListener("DOMContentLoaded", function () {
         ease: 'power2.out',
         onComplete: () => particle.remove()
       });
+      
+      // Timeout fallback to prevent memory leaks
+      setTimeout(() => {
+        if (particle.parentNode) {
+          particle.remove();
+        }
+      }, 1500);
     }
   }
 
@@ -620,7 +619,10 @@ document.addEventListener("DOMContentLoaded", function () {
         contactForm.reset();
       } catch (error) {
         showFormStatus('Oops! Something went wrong. Please try again or email directly.', 'error');
-        console.error('Form submission error:', error);
+        // Log error in development only
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.error('Form submission error:', error);
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -643,23 +645,44 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function submitContactForm(data) {
-    const response = await fetch(
-      'https://portfolio-backend-wt5.onrender.com/contact',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+    // Create AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/contact`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data),
+          signal: controller.signal
+        }
+      );
+
+      // Clear timeout on successful response
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Submission failed: ${response.status} ${errorText}`);
       }
-    );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Submission failed: ${response.status} ${errorText}`);
+      return await response.json();
+    } catch (error) {
+      // Clear timeout on error
+      clearTimeout(timeoutId);
+      
+      // Handle abort/timeout specifically
+      if (error.name === 'AbortError') {
+        throw new Error(`Request timeout: The server did not respond within ${API_TIMEOUT / 1000} seconds`);
+      }
+      
+      // Re-throw other errors
+      throw error;
     }
-
-    return await response.json();
   }
 
   } // End initializePortfolio function
