@@ -527,7 +527,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* ── HERO ── */
-#hero {
+#Home {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -541,7 +541,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* Decorative background elements - positioned in corners */
-#hero::before {
+#Home::before {
     content: '';
     position: absolute;
     top: 5%;
@@ -555,7 +555,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     animation: float 6s ease-in-out infinite;
 }
 
-#hero::after {
+#Home::after {
     content: '';
     position: absolute;
     bottom: 5%;
@@ -1240,7 +1240,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* ── ABOUT ── */
-#about {
+#About {
     padding: 120px 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1252,7 +1252,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* About section decorative circles - positioned in corners */
-#about::before {
+#About::before {
     content: '';
     position: absolute;
     top: 5%;
@@ -1266,7 +1266,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     animation: float 7s ease-in-out infinite;
 }
 
-#about::after {
+#About::after {
     content: '';
     position: absolute;
     bottom: 5%;
@@ -1633,7 +1633,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* ── SERVICES ── */
-#services {
+#Services {
     padding: 120px 48px;
     border-bottom: var(--border);
     position: relative;
@@ -1641,7 +1641,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* Services section decorative circles - positioned in corners */
-#services::before {
+#Services::before {
     content: '';
     position: absolute;
     top: 5%;
@@ -1655,7 +1655,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     animation: float 8s ease-in-out infinite;
 }
 
-#services::after {
+#Services::after {
     content: '';
     position: absolute;
     bottom: 5%;
@@ -1889,7 +1889,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* ── PROJECTS ── */
-#projects {
+#Projects {
     padding: 120px 48px;
     border-bottom: var(--border);
     position: relative;
@@ -1897,7 +1897,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* Projects section decorative circles - positioned in corners */
-#projects::before {
+#Projects::before {
     content: '';
     position: absolute;
     top: 5%;
@@ -1911,7 +1911,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     animation: float 9s ease-in-out infinite;
 }
 
-#projects::after {
+#Projects::after {
     content: '';
     position: absolute;
     bottom: 5%;
@@ -2026,7 +2026,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* ── CONTACT ── */
-#contact {
+#Contact {
     padding: 80px 48px;
     display: flex;
     flex-direction: column;
@@ -2035,7 +2035,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 /* Contact section decorative circles - positioned in corners */
-#contact::before {
+#Contact::before {
     content: '';
     position: absolute;
     top: 5%;
@@ -2049,7 +2049,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     animation: float 11s ease-in-out infinite;
 }
 
-#contact::after {
+#Contact::after {
     content: '';
     position: absolute;
     bottom: 5%;
@@ -2392,7 +2392,7 @@ footer {
         gap: 20px
     }
 
-    #hero {
+    #Home {
         grid-template-columns: 1fr;
         padding: 100px 24px 80px;
         text-align: center
@@ -2447,10 +2447,10 @@ footer {
         display: none
     }
 
-    #about,
-    #services,
-    #projects,
-    #contact {
+    #About,
+    #Services,
+    #Projects,
+    #Contact {
         padding: 80px 24px
     }
 
@@ -2472,7 +2472,7 @@ footer {
         display: none
     }
 
-    #about {
+    #About {
         grid-template-columns: 1fr
     }
 
@@ -2683,7 +2683,7 @@ footer {
         flex: 1
     }
 
-    #hero {
+    #Home {
         padding: 90px 16px 60px
     }
 
@@ -2727,10 +2727,10 @@ footer {
         font-size: 9px
     }
 
-    #about,
-    #services,
-    #projects,
-    #contact {
+    #About,
+    #Services,
+    #Projects,
+    #Contact {
         padding: 60px 16px
     }
 
@@ -2923,7 +2923,7 @@ footer {
 
 /* ── MOBILE LANDSCAPE MODE ── */
 @media(max-width:900px) and (orientation: landscape) {
-    #hero {
+    #Home {
         min-height: auto;
         padding: 80px 24px 60px
     }
