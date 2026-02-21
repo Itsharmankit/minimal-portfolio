@@ -335,16 +335,8 @@ body::before {
 .hero-image-wrapper {
     will-change: transform
 }
-
 /* ── CLIP-PATH WIPE REVEAL (about image) ── */
-.about-img-box {
-    clip-path: inset(0 0% 0 0);
-    transition: clip-path .9s cubic-bezier(.77, 0, .18, 1)
-}
-
-.about-img-box.revealed {
-    clip-path: inset(0 0% 0 0)
-}
+/* Removed - video should display without clip-path animation */
 
 /* ── CURSOR (with fallback) ── */
 .cursor {
@@ -1298,6 +1290,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     align-items: center;
     justify-content: center;
     width: 100%;
+    min-height: 600px;
 }
 
 .about-label {
@@ -1398,17 +1391,10 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 .about-img-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 600px;
-    max-width: 100%;
-    background: transparent;
-    border: none;
-    border-radius: 8px;
     overflow: hidden;
-    opacity: 1;
+    border-radius: 8px;
 }
 
 .about-illustration-img {
@@ -1421,7 +1407,6 @@ nav.scrolled .nav-pill-link:not(.active) {
     object-fit: cover;
     object-position: center;
     display: block;
-    animation: none;
 }
 
 @keyframes floatAbout {

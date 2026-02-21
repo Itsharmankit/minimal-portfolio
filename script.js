@@ -518,6 +518,8 @@ if (!prefersReducedMotion) {
 }
 
 /* ── 6. ABOUT IMAGE CLIP-PATH WIPE REVEAL ── */
+// Disabled for video display
+/*
 if (!prefersReducedMotion) {
     ScrollTrigger.create({
         trigger: '.about-img-box',
@@ -529,6 +531,7 @@ if (!prefersReducedMotion) {
         }
     });
 }
+*/
 
 /* ── 7. SECTION TITLE CHARACTER REVEAL (Optimized - Simplified) ── */
 // Simplified version without creating hundreds of span elements
