@@ -1946,9 +1946,9 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: grid;
     grid-template-columns: 72px 1fr auto;
     align-items: center;
-    padding: 36px 0;
+    padding: 20px 0;
     border-bottom: var(--border);
-    gap: 36px;
+    gap: 24px;
     cursor: none;
     position: relative;
     overflow: hidden;
