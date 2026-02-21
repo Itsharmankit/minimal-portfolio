@@ -333,7 +333,12 @@ body::before {
 
 /* ── HERO IMAGE PARALLAX CONTAINER ── */
 .hero-image-wrapper {
-    will-change: transform
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    justify-self: end;
 }
 
 /* ── CLIP-PATH WIPE REVEAL (about image) ── */
@@ -540,6 +545,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    justify-items: center;
     padding: 100px 48px 80px;
     position: relative;
     overflow: hidden;
@@ -741,7 +747,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     white-space: nowrap;
     pointer-events: none;
     letter-spacing: -5px;
-    z-index: 0
+    z-index: 0;
+    text-align: center;
 }
 
 .hero-content {
@@ -751,7 +758,10 @@ nav.scrolled .nav-pill-link:not(.active) {
     justify-content: center;
     align-items: flex-start;
     text-align: left;
-    gap: 20px
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    justify-self: start;
 }
 
 .hero-greeting {
