@@ -2571,8 +2571,8 @@ footer {
         transform: translateX(-50%);
         box-shadow: none;
         border-width: 1.5px;
-        z-index: 10;
-        mix-blend-mode: lighten
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px)
     }
 
     .nav-logo:hover {
