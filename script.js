@@ -150,14 +150,89 @@ if (!isTouchDevice) {
         follower.style.display = 'block';
 
         let mx = 0, my = 0, fx = 0, fy = 0;
+        let lastDetect = 0;
+        let isOverText = false;
+        let lastTone = null;
 
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+        function isTextOrImage(element) {
+            if (!element) return false;
+
+            if (element.closest('a, button, .hero-btn, .nav-pill-link')) {
+                return true;
+            }
+
+            const tagName = element.tagName;
+            if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'LI', 'BUTTON', 'IMG', 'SVG', 'PATH'].includes(tagName)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function getElementTone(element) {
+            if (!element) return 'light';
+
+            let color = window.getComputedStyle(element).backgroundColor;
+            if (color === 'rgba(0, 0, 0, 0)' || color === 'transparent') {
+                color = window.getComputedStyle(element).color;
+            }
+
+            const rgb = color.match(/\d+/g);
+            if (!rgb || rgb.length < 3) {
+                return 'light';
+            }
+
+            const r = parseInt(rgb[0], 10);
+            const g = parseInt(rgb[1], 10);
+            const b = parseInt(rgb[2], 10);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            return brightness < 140 ? 'dark' : 'light';
+        }
+
+        function updateCursorState() {
+            const element = document.elementFromPoint(mx, my);
+            if (!element) return;
+
+            const overText = isTextOrImage(element);
+            if (overText !== isOverText) {
+                cursor.classList.toggle('expand', overText);
+                follower.classList.toggle('expand', overText);
+                cursor.style.opacity = overText ? '1' : '';
+                isOverText = overText;
+            }
+
+            if (overText) {
+                const tone = getElementTone(element);
+                if (tone !== lastTone) {
+                    if (tone === 'dark') {
+                        cursor.style.backgroundColor = 'var(--white)';
+                        follower.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+                    } else {
+                        cursor.style.backgroundColor = 'var(--black)';
+                        follower.style.borderColor = 'rgba(10, 10, 10, 0.35)';
+                    }
+                    lastTone = tone;
+                }
+            } else {
+                cursor.style.backgroundColor = '';
+                follower.style.borderColor = '';
+                lastTone = null;
+            }
+        }
 
         (function tick() {
             cursor.style.transform = `translate3d(${mx - 5}px,${my - 5}px,0)`;
             fx += (mx - fx) * 0.12;
             fy += (my - fy) * 0.12;
             follower.style.transform = `translate3d(${fx - 18}px,${fy - 18}px,0)`;
+
+            const now = performance.now();
+            if (now - lastDetect > 80) {
+                updateCursorState();
+                lastDetect = now;
+            }
             requestAnimationFrame(tick);
         })();
 
