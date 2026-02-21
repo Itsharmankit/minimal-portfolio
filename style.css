@@ -2558,8 +2558,8 @@ footer {
 /* ── MOBILE: 540px - 768px ── */
 @media(max-width:768px) {
     nav {
-        padding: 12px 16px;
-        min-height: 54px;
+        padding: 8px 14px;
+        min-height: 48px;
         justify-content: space-between;
         align-items: center;
         flex-wrap: nowrap;
@@ -2569,9 +2569,9 @@ footer {
 
     .nav-logo {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 22px;
+        font-size: 20px;
         letter-spacing: 2px;
-        padding: 4px 10px;
+        padding: 3px 8px;
         margin: 0;
         position: absolute;
         left: 50%;
@@ -2581,7 +2581,7 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 40px;
+        height: 36px;
         transition: color .3s, box-shadow .15s, transform .15s
     }
 
@@ -2623,8 +2623,8 @@ footer {
 
     .nav-pill-link {
         width: auto;
-        padding: 8px 14px;
-        font-size: 12px;
+        padding: 6px 10px;
+        font-size: 11px;
         letter-spacing: 1.5px;
         border-radius: 0;
         display: flex;
