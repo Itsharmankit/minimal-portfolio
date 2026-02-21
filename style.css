@@ -1939,18 +1939,16 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .projects-list {
     display: flex;
-    flex-direction: column;
-    max-width: 1100px;
-    margin: 0 auto
+    flex-direction: column
 }
 
 .project-item {
     display: grid;
     grid-template-columns: 72px 1fr auto;
     align-items: center;
-    padding: 36px 0;
+    padding: 24px 0;
     border-bottom: var(--border);
-    gap: 36px;
+    gap: 28px;
     cursor: none;
     position: relative;
     overflow: hidden;
