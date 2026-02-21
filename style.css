@@ -2550,29 +2550,41 @@ footer {
     }
 }
 
-/* ── MOBILE: 540px - 768px ── */
-@media(max-width:768px) {
-    nav {
-        padding: 8px 14px;
-        min-height: 54px;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: nowrap;
-        display: flex;
-        position: relative
-    }
+/* ===== MOBILE NAVBAR FIX ===== */
+@media (max-width: 768px) {
 
-    .nav-logo {
-        font-size: 20px;
-        padding: 4px 8px;
-        margin: 0;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        box-shadow: none;
-        border-width: 1.5px;
-        z-index: 5
-    }
+  nav {
+    display: flex;
+    align-items: center;          /* Perfect vertical center */
+    justify-content: space-between;
+    height: 60px;                 /* Clean fixed height */
+    padding: 0 16px;
+    background: #fff;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    width: 42px;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    position: relative;           /* Important: NOT absolute */
+    transform: none;
+    box-shadow: none;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+}
 
     .nav-logo:hover {
         transform: none;
