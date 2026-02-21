@@ -162,6 +162,12 @@ if (!isTouchDevice) {
                 return true;
             }
 
+            if (element.closest(
+                '.project-name, .project-cat, .project-tag, .service-title, .service-desc, .service-tag, .skill-name, .contact-desc, .contact-heading, .section-label, .section-title, .stat-num, .stat-label, .hero-tagline'
+            )) {
+                return true;
+            }
+
             const tagName = element.tagName;
             if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'LI', 'BUTTON', 'IMG', 'SVG', 'PATH'].includes(tagName)) {
                 return true;
