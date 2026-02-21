@@ -20,39 +20,6 @@
     --clip-corner-sm: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)
 }
 
-/* ── FALLBACK ANIMATIONS (for when GSAP fails to load) ── */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Fallback animation when JavaScript is disabled */
-.no-js .hero-name .line {
-    animation: fadeInUp 0.8s ease 3s forwards;
-}
-
-.no-js .hero-tagline {
-    animation: fadeInUp 0.8s ease 3.3s forwards;
-}
-
-.no-js .hero-animated-text {
-    animation: fadeInUp 0.8s ease 3.2s forwards;
-}
-
-.no-js .hero-cta {
-    animation: fadeInUp 0.8s ease 3.2s forwards;
-}
-
-.no-js .hero-image-box {
-    animation: fadeInUp 0.8s ease 3.4s forwards;
-}
-
 /* ── MOBILE & TOUCH OPTIMIZATIONS ── */
 html {
     -webkit-text-size-adjust: 100%;
@@ -76,6 +43,17 @@ a, button, .hero-btn, .nav-pill-link, .social-icon-btn, .footer-social {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
+}
+
+/* Smooth scroll for all */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 /* ── GEOMETRIC HERO PATTERN (removed) ── */
@@ -454,11 +432,6 @@ body:not(.touch-device) .cursor-follower {
     display: flex;
     align-items: center;
     justify-content: center
-}
-
-/* Hide loader when JavaScript is disabled */
-.no-js .page-loader {
-    display: none
 }
 
 .loader-text {
@@ -861,14 +834,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     }
 }
 
-/* Progressive enhancement: visible by default, hidden only when JS is available */
 .hero-name .line {
     display: block;
-    transform: translateY(0);
-    opacity: 1
-}
-
-.js-enabled .hero-name .line {
     transform: translateY(80px);
     opacity: 0
 }
@@ -886,12 +853,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     color: #555; /* Improved contrast */
     max-width: 480px;
     margin: 0 0 24px;
-    opacity: 1;
+    opacity: 0;
     text-align: left
-}
-
-.js-enabled .hero-tagline {
-    opacity: 0
 }
 
 .hero-animated-text {
@@ -900,12 +863,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     gap: 16px;
     margin-bottom: 28px;
     flex-wrap: wrap;
-    opacity: 1;
+    opacity: 0;
     justify-content: flex-start
-}
-
-.js-enabled .hero-animated-text {
-    opacity: 0
 }
 
 .hero-animated-text span {
@@ -926,12 +885,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    opacity: 1;
+    opacity: 0;
     justify-content: flex-start
-}
-
-.js-enabled .hero-cta {
-    opacity: 0
 }
 
 .hero-btn {
@@ -978,11 +933,6 @@ nav.scrolled .nav-pill-link:not(.active) {
     overflow: hidden;
     border-radius: 8px;
     background: #ffffff;
-    opacity: 1;
-    transform: scale(1)
-}
-
-.js-enabled .hero-image-box {
     opacity: 0;
     transform: scale(.95)
 }
@@ -1063,10 +1013,6 @@ nav.scrolled .nav-pill-link:not(.active) {
     text-transform: uppercase;
     color: var(--gray);
     z-index: 2;
-    opacity: 1
-}
-
-.js-enabled .hero-scroll {
     opacity: 0
 }
 
@@ -3045,8 +2991,7 @@ footer {
 }
 
 /* ── CUSTOM CURSOR ── */
-body.cursor-active,
-body.cursor-active * {
+* {
     cursor: none !important;
 }
 
