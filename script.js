@@ -100,13 +100,16 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 /* ── HERO MOUSE PARALLAX (Fixed: removed pseudo-element targeting) ── */
 if (!isTouchDevice && !prefersReducedMotion) {
-    document.addEventListener('mousemove', e => {
-        const rx = (e.clientX / window.innerWidth - 0.5) * 12;
-        const ry = (e.clientY / window.innerHeight - 0.5) * 12;
-        gsap.to('.hero-bg-text', {
-            x: rx * 0.6, y: ry * 0.6, duration: 1.4, ease: 'power2.out', overwrite: 'auto'
-        });
-    }, { passive: true });
+    const heroBgText = document.querySelector('.hero-bg-text');
+    if (heroBgText) {
+        document.addEventListener('mousemove', e => {
+            const rx = (e.clientX / window.innerWidth - 0.5) * 12;
+            const ry = (e.clientY / window.innerHeight - 0.5) * 12;
+            gsap.to(heroBgText, {
+                x: rx * 0.6, y: ry * 0.6, duration: 1.4, ease: 'power2.out', overwrite: 'auto'
+            });
+        }, { passive: true });
+    }
 }
 
 /* ── XVS-STYLE LETTER-BY-LETTER REVEAL ON SECTION LABELS (Optimized) ── */
@@ -158,7 +161,7 @@ if (!isTouchDevice) {
         function isTextOrImage(element) {
             if (!element) return false;
 
-            if (element.closest('a, button, .hero-btn, .nav-pill-link')) {
+            if (element.closest('a, button, .hero-btn, .nav-pill-link, .skill-item')) {
                 return true;
             }
 
