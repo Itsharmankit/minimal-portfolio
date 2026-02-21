@@ -4,7 +4,7 @@
    ============================================= */
 
 // Configuration constants
-const API_BASE_URL = 'https://portfolio-backend-wt5.onrender.com';
+const API_BASE_URL = 'https://portfollio-backend-wwt5.onrender.com';
 const API_TIMEOUT = 30000; // 30 seconds
 
 // Wait for DOM to be fully loaded before running scripts
