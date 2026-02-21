@@ -342,10 +342,11 @@ if (!prefersReducedMotion) {
         opacity: 0, y: 24, duration: 0.6, delay: 0.2, ease: 'power2.out',
         scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
     });
-    gsap.from('.about-img-box', {
-        opacity: 0, scale: 0.95, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 65%', once: true }
-    });
+    // About video - no animation, show immediately
+    // gsap.from('.about-img-box', {
+    //     opacity: 0, scale: 0.95, duration: 0.8, ease: 'power2.out',
+    //     scrollTrigger: { trigger: '#about', start: 'top 65%', once: true }
+    // });
 
     // Skills
     ScrollTrigger.batch('.skill-item', {
