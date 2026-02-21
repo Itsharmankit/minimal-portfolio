@@ -401,6 +401,17 @@ body:not(.touch-device) .cursor-follower {
     height: 60px
 }
 
+.cursor.contrast {
+    background: #ffffff;
+    mix-blend-mode: difference;
+    opacity: 0.95;
+}
+
+.cursor-follower.contrast {
+    border-color: rgba(255, 255, 255, 0.7);
+    mix-blend-mode: difference;
+}
+
 /* ── PARTICLE EXPLOSION EFFECT ── */
 .particle-explosion {
     position: fixed;
