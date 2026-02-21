@@ -924,8 +924,9 @@ nav.scrolled .nav-pill-link:not(.active) {
     position: relative;
     z-index: 2;
     display: flex;
-    justify-content: center;
-    align-items: center
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: -40px;
 }
 
  .hero-image-box {
@@ -2422,7 +2423,9 @@ footer {
 
     .hero-image-wrapper {
         order: -1;
-        margin-bottom: 24px
+        margin-bottom: 24px;
+        justify-content: center;
+        margin-left: 0;
     }
 
     .hero-image-box {
