@@ -5,7 +5,7 @@
 
 // Configuration constants
 const API_BASE_URL = 'https://portfollio-backend-wwt5.onrender.com';
-const API_TIMEOUT = 30000; // 30 seconds
+const API_TIMEOUT = 15000; // 15 seconds
 
 // Wait for DOM to be fully loaded before running scripts
 document.addEventListener('DOMContentLoaded', function() {
@@ -683,11 +683,17 @@ if (contactForm) {
         }
         
         try {
-            await submitContactForm(formData);
-
-            // Success
+            // Show success immediately for better UX (optimistic UI)
             showFormStatus('Message sent successfully! I\'ll get back to you soon.', 'success');
             contactForm.reset();
+            
+            // Send in background
+            submitContactForm(formData).catch(error => {
+                showFormStatus('Message was shown sent, but there may have been a server issue. Please email directly if needed.', 'warning');
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Form submission error:', error);
+                }
+            });
         } catch (error) {
             showFormStatus('Oops! Something went wrong. Please try again or email directly.', 'error');
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {

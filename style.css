@@ -2287,6 +2287,12 @@ nav.scrolled .nav-pill-link:not(.active) {
     border: 1px solid #f5c6cb;
 }
 
+.form-status-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
 /* Particle animation for button clicks */
 .particle-dot {
     position: fixed;
