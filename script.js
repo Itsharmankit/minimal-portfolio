@@ -271,12 +271,15 @@ window.addEventListener('scroll', () => {
                 nav.classList.remove('scrolled');
             }
             
-            // Hide navbar on scroll down, show on scroll up
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // Scrolling down
-                nav.classList.add('nav-hidden');
-            } else {
+            // Show navbar on scroll down, hide on scroll up
+            if (currentScrollY < lastScrollY && currentScrollY > 100) {
                 // Scrolling up
+                nav.classList.add('nav-hidden');
+            } else if (currentScrollY > 100) {
+                // Scrolling down
+                nav.classList.remove('nav-hidden');
+            } else {
+                // At top of page
                 nav.classList.remove('nav-hidden');
             }
             
