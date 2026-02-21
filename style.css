@@ -3151,24 +3151,30 @@ footer {
 
 @media (max-width: 768px) {
 
-  /* HERO SECTION STACK */
-  .hero-content {
-    display: flex;
+  /* NAVBAR STACK */
+  #mainNav {
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
-  /* NAVBAR STACK */
-  nav ul {
+  .nav-pill {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 8px;
     align-items: center;
   }
 
-  nav ul li {
+  .nav-pill-link {
     width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* HERO STACK */
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
@@ -3178,7 +3184,7 @@ footer {
     height: auto;
   }
 
-  /* TEXT SIZE ADJUSTMENT */
+  /* TEXT SIZE */
   h1 {
     font-size: 28px;
   }
@@ -3186,4 +3192,5 @@ footer {
   p {
     font-size: 14px;
   }
+
 }
