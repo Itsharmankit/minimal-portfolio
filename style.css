@@ -440,7 +440,7 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 16px 40px;
+    padding: 12px 36px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -454,13 +454,13 @@ nav.nav-hidden {
 
 .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: 2px;
     text-decoration: none;
     transition: color .3s, box-shadow .15s, transform .15s;
     border: 2px solid var(--black);
-    padding: 5px 12px;
-    box-shadow: 4px 4px 0 0 var(--yellow)
+    padding: 4px 10px;
+    box-shadow: 3px 3px 0 0 var(--yellow)
 }
 
 .nav-logo:hover {
@@ -476,9 +476,9 @@ nav.nav-hidden {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(10, 10, 10, 0.10);
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 3px;
-    gap: 6px
+    gap: 4px
 }
 
 .nav-group {
@@ -491,13 +491,13 @@ nav.nav-hidden {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 16px;
-    font-size: 11px;
+    padding: 5px 14px;
+    font-size: 10px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     text-decoration: none;
     color: #0a0a0a;
-    border-radius: 10px;
+    border-radius: 9px;
     font-family: 'Space Mono', monospace;
     transition: background .3s, color .3s, transform .2s;
     white-space: nowrap
@@ -2558,8 +2558,8 @@ footer {
 /* ── MOBILE: 540px - 768px ── */
 @media(max-width:768px) {
     nav {
-        padding: 8px 14px;
-        min-height: 48px;
+        padding: 6px 12px;
+        min-height: 44px;
         justify-content: space-between;
         align-items: center;
         flex-wrap: nowrap;
@@ -2569,7 +2569,7 @@ footer {
 
     .nav-logo {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 20px;
+        font-size: 18px;
         letter-spacing: 2px;
         padding: 3px 8px;
         margin: 0;
@@ -2581,7 +2581,7 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 36px;
+        height: 32px;
         transition: color .3s, box-shadow .15s, transform .15s
     }
 
@@ -2623,8 +2623,8 @@ footer {
 
     .nav-pill-link {
         width: auto;
-        padding: 6px 10px;
-        font-size: 11px;
+        padding: 5px 9px;
+        font-size: 10px;
         letter-spacing: 1.5px;
         border-radius: 0;
         display: flex;
