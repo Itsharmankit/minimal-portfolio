@@ -2641,7 +2641,8 @@ footer {
 
     .hero-image-box {
         width: 100%;
-        max-width: 520px
+        max-width: 600px;
+        aspect-ratio: 16/10
     }
 
     .hero-content {
@@ -2712,7 +2713,8 @@ footer {
     }
 
     .about-img-box {
-        height: 240px
+        width: 100%;
+        height: 300px
     }
 
     .about-img-box video {
