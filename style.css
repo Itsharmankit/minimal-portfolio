@@ -447,6 +447,35 @@ nav {
     transition: background .3s, border-bottom .3s
 }
 
+.nav-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--black);
+    background: var(--white);
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    box-shadow: 3px 3px 0 0 var(--yellow);
+    transition: transform .2s ease, box-shadow .2s ease;
+    cursor: pointer
+}
+
+.nav-toggle:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--yellow)
+}
+
+.nav-toggle-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease
+}
+
 .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 26px;
@@ -2173,8 +2202,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     border: 2px solid var(--black);
     border-radius: 4px;
     text-decoration: none;
@@ -2190,12 +2219,9 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: none
 }
 
-.social-icon-btn:hover {
-    background: var(--white);
-    color: var(--black)
-}
-
 .social-icon-btn svg {
+    width: 16px;
+    height: 16px;
     transition: transform .2s
 }
 
@@ -2548,15 +2574,58 @@ footer {
 
 /* ── MOBILE: 540px - 768px ── */
 @media(max-width:768px) {
+    nav {
+        padding: 16px 20px;
+        flex-wrap: wrap;
+        gap: 12px
+    }
+
+    .nav-toggle {
+        display: inline-flex
+    }
+
     .nav-pill {
-        padding: 3px;
-        gap: 1px
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: min(72vw, 320px);
+        flex-direction: column;
+        align-items: stretch;
+        background: var(--white);
+        border-left: 2px solid var(--black);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
+        padding: 88px 20px 24px;
+        gap: 0;
+        opacity: 0;
+        transition: right .35s ease, opacity .25s ease;
+        z-index: 1001
     }
 
     .nav-pill-link {
-        padding: 6px 10px;
-        font-size: 9px;
-        letter-spacing: 0.5px
+        width: 100%;
+        padding: 12px 0;
+        font-size: 11px;
+        letter-spacing: 1px;
+        border-radius: 0;
+        border-bottom: 1px solid #eee
+    }
+
+    #mainNav.nav-open .nav-pill {
+        right: 0;
+        opacity: 1
+    }
+
+    #mainNav.nav-open .nav-toggle-line:nth-child(1) {
+        transform: translateY(6px) rotate(45deg)
+    }
+
+    #mainNav.nav-open .nav-toggle-line:nth-child(2) {
+        opacity: 0
+    }
+
+    #mainNav.nav-open .nav-toggle-line:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg)
     }
 
     .hero-name {
@@ -2577,6 +2646,22 @@ footer {
         font-size: 11px;
         padding: 12px 20px;
         min-width: 130px
+    }
+
+    .hero-content {
+        align-items: center;
+        text-align: center
+    }
+
+    .hero-image-wrapper {
+        margin-left: 0;
+        justify-content: center;
+        margin-top: 24px
+    }
+
+    .hero-image-box {
+        width: 100%;
+        max-width: 520px
     }
 
     .about-heading {
@@ -2635,14 +2720,25 @@ footer {
         font-size: clamp(32px, 7vw, 44px)
     }
 
+    .contact-info {
+        align-items: center;
+        text-align: center
+    }
+
+    .contact-desc {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center
+    }
+
     .social-icons-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px
+        justify-content: center;
+        gap: 10px
     }
 
     .social-icon-btn {
-        width: 100%;
-        height: 100px
+        width: 40px;
+        height: 40px
     }
 }
 
@@ -2847,13 +2943,13 @@ footer {
     }
 
     .social-icons-row {
-        grid-template-columns: 1fr;
-        gap: 12px
+        justify-content: center;
+        gap: 10px
     }
 
     .social-icon-btn {
-        width: 100%;
-        height: 88px
+        width: 38px;
+        height: 38px
     }
 
     .social-icon-svg {
@@ -2960,8 +3056,8 @@ footer {
     }
 
     .social-icons-row {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px
+        justify-content: center;
+        gap: 10px
     }
 }
 

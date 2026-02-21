@@ -252,6 +252,26 @@ addParticleEffect('.footer-social');       // Footer social icons
 /* ── NAV: SCROLL STATE + MORPHIC ACTIVE PILL ── */
 const nav = document.getElementById('mainNav');
 const pillLinks = document.querySelectorAll('.nav-pill-link');
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.getElementById('navMenu');
+
+if (navToggle && navMenu && nav) {
+    navToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
+
+    pillLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.matchMedia('(max-width: 768px)').matches && nav.classList.contains('nav-open')) {
+                nav.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.setAttribute('aria-label', 'Open navigation');
+            }
+        });
+    });
+}
 
 // Frosted/shadow state on scroll
 window.addEventListener('scroll', () => {

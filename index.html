@@ -73,7 +73,12 @@
   <!-- NAV -->
   <nav id="mainNav" class="hero-zone" role="navigation" aria-label="Main navigation">
     <a href="#Home" class="nav-logo" aria-label="Ankit Sharma - Home">AS</a>
-    <div class="nav-pill" role="menubar">
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navMenu">
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+    <div class="nav-pill" id="navMenu" role="menubar">
       <a href="#Home" class="nav-pill-link active" data-section="Home" role="menuitem">Home</a>
       <a href="#About" class="nav-pill-link" data-section="About" role="menuitem">About</a>
       <a href="#Services" class="nav-pill-link" data-section="Services" role="menuitem">Services</a>
