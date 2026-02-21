@@ -928,7 +928,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .hero-image-box {
     position: relative;
-    width: clamp(400px, 95%, 700px);
+    width: clamp(500px, 95%, 1000px);
     aspect-ratio: 16/10;
     overflow: hidden;
     border-radius: 8px;
@@ -2420,7 +2420,7 @@ footer {
     }
 
     .hero-image-box {
-        width: clamp(280px, 70%, 450px)
+        width: clamp(300px, 85%, 600px)
     }
 
     .hero-scroll {
@@ -2705,7 +2705,7 @@ footer {
     }
 
     .hero-image-box {
-        width: 300px
+        width: 400px
     }
 
     .hero-scroll {
