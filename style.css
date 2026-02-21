@@ -2563,18 +2563,21 @@ footer {
     }
 
     .nav-logo {
-        font-size: 20px;
-        padding: 4px 8px;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 26px;
+        letter-spacing: 2px;
+        padding: 6px 14px;
         margin: 0;
         position: static;
         transform: none;
-        box-shadow: none;
-        border-width: 1.5px
+        border: 2px solid var(--black);
+        box-shadow: 4px 4px 0 0 var(--yellow);
+        transition: color .3s, box-shadow .15s, transform .15s
     }
 
     .nav-logo:hover {
-        transform: none;
-        box-shadow: none
+        box-shadow: 1px 1px 0 0 var(--yellow);
+        transform: translate(3px, 3px)
     }
 
     .nav-pill {
