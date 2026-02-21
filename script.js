@@ -283,7 +283,7 @@ sections.forEach(s => sectionObserver.observe(s));
 window.addEventListener('scroll', () => {
     if (window.scrollY < 80) {
         pillLinks.forEach(link => {
-            link.classList.toggle('active', link.dataset.section === 'hero');
+            link.classList.toggle('active', link.dataset.section === 'Home');
         });
     }
 }, { passive: true });
@@ -351,20 +351,20 @@ if (!prefersReducedMotion) {
     // About
     gsap.from('.about-heading', {
         opacity: 0, y: 44, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
+        scrollTrigger: { trigger: '#About', start: 'top 76%', once: true }
     });
     gsap.from('.about-text', {
         opacity: 0, y: 24, duration: 0.6, delay: 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
+        scrollTrigger: { trigger: '#About', start: 'top 76%', once: true }
     });
     gsap.from('.about-stats', {
         opacity: 0, y: 24, duration: 0.6, delay: 0.2, ease: 'power2.out',
-        scrollTrigger: { trigger: '#about', start: 'top 76%', once: true }
+        scrollTrigger: { trigger: '#About', start: 'top 76%', once: true }
     });
     // About video - no animation, show immediately
     // gsap.from('.about-img-box', {
     //     opacity: 0, scale: 0.95, duration: 0.8, ease: 'power2.out',
-    //     scrollTrigger: { trigger: '#about', start: 'top 65%', once: true }
+    //     scrollTrigger: { trigger: '#About', start: 'top 65%', once: true }
     // });
 
     // Skills
@@ -394,7 +394,7 @@ if (!prefersReducedMotion) {
     // Contact
     gsap.from('.contact-heading', {
         opacity: 0, y: 56, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: '#contact', start: 'top 76%', once: true }
+        scrollTrigger: { trigger: '#Contact', start: 'top 76%', once: true }
     });
 
     // Social buttons
@@ -480,7 +480,7 @@ if (!prefersReducedMotion) {
         yPercent: -12,
         ease: 'none',
         scrollTrigger: {
-            trigger: '#hero',
+            trigger: '#Home',
             start: 'top top',
             end: 'bottom top',
             scrub: 1, // Smoothing value (was true, now 1 for better performance)
