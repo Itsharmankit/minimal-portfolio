@@ -538,7 +538,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 #hero {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 0.9fr 1.2fr;
     align-items: center;
     padding: 100px 48px 80px;
     position: relative;
