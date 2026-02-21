@@ -3139,42 +3139,47 @@ footer {
     font-weight: 600;
 }
 
+/* ============================= */
+/* ===== 540px SMALL PHONE ===== */
+/* ============================= */
 @media (max-width: 540px) {
-    .error-card {
-        padding: 32px 22px; 
-    }
-}  
 
-/* ========================= */
-/* MOBILE RESPONSIVE FIX */
-/* ========================= */
-
-@media (max-width: 768px) {
-
-  /* NAVBAR STACK */
-  #mainNav {
-    flex-direction: column;
-    align-items: center;
+  .error-card {
+    padding: 32px 22px;
   }
 
+}
+
+
+/* ============================= */
+/* ===== 768px MOBILE FIX ===== */
+/* ============================= */
+@media (max-width: 768px) {
+
+  /* HERO STACK */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* NAVBAR STACK */
   .nav-pill {
     display: flex;
     flex-direction: column;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
     width: 100%;
-    gap: 8px;
-    align-items: center;
   }
 
   .nav-pill-link {
     width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
-
-  /* HERO STACK */
-  .hero-content {
-    flex-direction: column;
-    align-items: center;
+    padding: 14px 0;
+    border-radius: 0;
+    border-bottom: 1px solid #eee;
     text-align: center;
   }
 
@@ -3184,7 +3189,7 @@ footer {
     height: auto;
   }
 
-  /* TEXT SIZE */
+  /* TEXT ADJUSTMENT */
   h1 {
     font-size: 28px;
   }
