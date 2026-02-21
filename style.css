@@ -928,7 +928,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .hero-image-box {
     position: relative;
-    width: clamp(500px, 95%, 1000px);
+    width: clamp(500px, 95%, 2000px);
     aspect-ratio: 16/10;
     overflow: hidden;
     border-radius: 8px;
