@@ -614,10 +614,11 @@ if (contactForm) {
         }
         
         // Get form data
+        const rawPhone = document.getElementById('phone').value.trim();
         const formData = {
             name: document.getElementById('name').value.trim(),
             email: document.getElementById('email').value.trim(),
-            subject: document.getElementById('subject').value.trim(),
+            phone: rawPhone.replace(/\D/g, ''),
             message: document.getElementById('message').value.trim()
         };
         
@@ -632,8 +633,8 @@ if (contactForm) {
             return;
         }
         
-        if (!formData.subject || formData.subject.length < 3) {
-            showFormStatus('Please enter a subject', 'error');
+        if (formData.phone.length !== 10) {
+            showFormStatus('Please enter a 10-digit phone number', 'error');
             return;
         }
         

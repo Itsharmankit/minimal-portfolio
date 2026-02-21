@@ -493,7 +493,7 @@
       <form class="contact-form" id="contactForm" method="POST" action="#" novalidate>
         <input type="text" class="form-field" name="name" id="name" placeholder="Your Name" required aria-label="Your name" autocomplete="name">
         <input type="email" class="form-field" name="email" id="email" placeholder="Email Address" required aria-label="Your email address" autocomplete="email">
-        <input type="text" class="form-field" name="subject" id="subject" placeholder="Subject" required aria-label="Message subject">
+        <input type="tel" class="form-field" name="phone" id="phone" placeholder="Phone Number" required aria-label="Phone number" autocomplete="tel" inputmode="numeric" pattern="\d{10}" maxlength="10">
         <textarea class="form-field" name="message" id="message" rows="4" placeholder="Your Message" required aria-label="Your message"></textarea>
         <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
         <button class="form-btn" type="submit" id="submitBtn">Get In Touch</button>
