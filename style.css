@@ -2618,7 +2618,7 @@ footer {
 
     .nav-pill-link {
         width: auto;
-        padding: 0;
+        padding: 8px 14px;
         font-size: 12px;
         letter-spacing: 1.5px;
         border-radius: 0;
@@ -2628,7 +2628,47 @@ footer {
         text-transform: uppercase;
         text-decoration: none;
         color: #0a0a0a;
-        transition: color .3s
+        background: transparent;
+        margin: 0;
+        transition: all .3s cubic-bezier(0.4, 0, 0.2, 1)
+    }
+
+    .nav-pill-link.active {
+        background: var(--black);
+        color: var(--white);
+        border-radius: 10px;
+        margin: 0 6px;
+        font-weight: 600;
+        transform: scale(1.02)
+    }
+
+    .nav-pill-link.active + .nav-pill-link,
+    .nav-pill-link:has(+ .nav-pill-link.active) {
+        border-radius: 0
+    }
+
+    .nav-group .nav-pill-link:first-child:not(.active) {
+        border-radius: 10px 0 0 10px
+    }
+
+    .nav-group .nav-pill-link:last-child:not(.active) {
+        border-radius: 0 10px 10px 0
+    }
+
+    .nav-left .nav-pill-link:has(+ .nav-pill-link.active) {
+        border-radius: 10px 0 0 10px
+    }
+
+    .nav-left .nav-pill-link.active + .nav-pill-link {
+        border-radius: 0 10px 10px 0
+    }
+
+    .nav-right .nav-pill-link:has(+ .nav-pill-link.active) {
+        border-radius: 10px 0 0 10px
+    }
+
+    .nav-right .nav-pill-link.active + .nav-pill-link {
+        border-radius: 0 10px 10px 0
     }
 
     .nav-pill-link[data-section="Home"] {
@@ -2636,10 +2676,16 @@ footer {
     }
 
     nav.scrolled {
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         box-shadow: 0 4px 16px rgba(10, 10, 10, 0.12)
+    }
+
+    nav.scrolled .nav-pill {
+        background: rgba(10, 10, 10, 0.04);
+        border-radius: 12px;
+        padding: 4px
     }
 
     nav.scrolled .nav-logo,
