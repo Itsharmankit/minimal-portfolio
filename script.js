@@ -602,55 +602,6 @@ document.querySelectorAll(
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 const submitBtn = document.getElementById('submitBtn');
-const phoneInput = document.getElementById('phone');
-
-function formatPhoneValue(rawValue) {
-    let digits = rawValue.replace(/\D/g, '');
-
-    if (digits.startsWith('91') && digits.length > 10) {
-        digits = digits.slice(2);
-    }
-
-    digits = digits.slice(0, 10);
-
-    const first = digits.slice(0, 5);
-    const second = digits.slice(5);
-
-    if (!digits) {
-        return '';
-    }
-
-    return `+91 ${first}${second ? ' ' + second : ''}`;
-}
-
-function normalizePhoneDigits(rawValue) {
-    let digits = rawValue.replace(/\D/g, '');
-
-    if (digits.startsWith('91') && digits.length > 10) {
-        digits = digits.slice(2);
-    }
-
-    return digits.slice(0, 10);
-}
-
-if (phoneInput) {
-    phoneInput.addEventListener('focus', () => {
-        if (!phoneInput.value) {
-            phoneInput.value = '+91 ';
-        }
-    });
-
-    phoneInput.addEventListener('input', () => {
-        const formatted = formatPhoneValue(phoneInput.value);
-        phoneInput.value = formatted || '+91 ';
-    });
-
-    phoneInput.addEventListener('blur', () => {
-        if (normalizePhoneDigits(phoneInput.value).length === 0) {
-            phoneInput.value = '';
-        }
-    });
-}
 
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
@@ -667,7 +618,7 @@ if (contactForm) {
         const formData = {
             name: document.getElementById('name').value.trim(),
             email: document.getElementById('email').value.trim(),
-            phone: normalizePhoneDigits(rawPhone),
+            phone: rawPhone,
             message: document.getElementById('message').value.trim()
         };
         
@@ -682,8 +633,8 @@ if (contactForm) {
             return;
         }
         
-        if (formData.phone.length !== 10) {
-            showFormStatus('Please enter a 10-digit phone number', 'error');
+        if (!formData.phone) {
+            showFormStatus('Please enter a phone number', 'error');
             return;
         }
         
