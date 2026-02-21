@@ -1939,7 +1939,9 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .projects-list {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    max-width: 1100px;
+    margin: 0 auto
 }
 
 .project-item {
