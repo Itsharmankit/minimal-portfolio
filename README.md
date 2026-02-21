@@ -287,7 +287,7 @@ The form currently uses a simulated submission. To test:
 
 **Libraries Used**:
 - GSAP 3.12.2 (Animation library)
-- Google Fonts (Space Mono, Bebas Neue, DM Serif Display, Sora, Satisfy)
+- Google Fonts (Space Mono, Bebas Neue, DM Serif Display, Sora, Patung)
 
 ---
 
