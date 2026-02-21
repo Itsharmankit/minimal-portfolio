@@ -2570,7 +2570,9 @@ footer {
         left: 50%;
         transform: translateX(-50%);
         box-shadow: none;
-        border-width: 1.5px
+        border-width: 1.5px;
+        z-index: 10;
+        mix-blend-mode: lighten
     }
 
     .nav-logo:hover {
@@ -2597,7 +2599,7 @@ footer {
 
     .nav-left,
     .nav-right {
-        width: calc(50% - 32px)
+        width: calc(50% - 24px)
     }
 
     .nav-left {
@@ -2611,8 +2613,8 @@ footer {
     .nav-pill-link {
         width: auto;
         padding: 0;
-        font-size: 11px;
-        letter-spacing: 1px;
+        font-size: 12px;
+        letter-spacing: 0.5px;
         border-radius: 0
     }
 
@@ -2621,9 +2623,9 @@ footer {
     }
 
     nav.scrolled {
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         box-shadow: 0 6px 24px rgba(10, 10, 10, 0.12)
     }
 
