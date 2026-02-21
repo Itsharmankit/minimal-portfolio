@@ -808,7 +808,8 @@ nav.scrolled .nav-pill-link:not(.active) {
 .hero-script-bold {
     font-size: clamp(48px, 8vw, 120px);
     display: block;
-    line-height: 1.05
+    line-height: 1.05;
+    white-space: nowrap;
 }
 
 /* Ankit Sharma — Satisfy handwritten script with shimmer */
@@ -818,6 +819,7 @@ nav.scrolled .nav-pill-link:not(.active) {
     font-weight: 400;
     font-size: clamp(48px, 8vw, 120px);
     letter-spacing: 1px;
+    white-space: nowrap;
     background: linear-gradient(90deg,
             #0a0a0a 0%,
             #0a0a0a 30%,
