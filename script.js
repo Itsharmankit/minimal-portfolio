@@ -596,8 +596,10 @@ if (contactForm) {
         }
         
         // Disable submit button
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+        }
         
         try {
             await submitContactForm(formData);
@@ -611,8 +613,10 @@ if (contactForm) {
                 console.error('Form submission error:', error);
             }
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Get In Touch';
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get In Touch';
+            }
         }
     });
 }
