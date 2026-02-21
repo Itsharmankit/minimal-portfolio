@@ -259,6 +259,8 @@ let ticking = false;
 
 window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
+    const isMobile = window.innerWidth <= 768;
+    const scrollThreshold = isMobile ? 50 : 100;
     
     if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -272,10 +274,10 @@ window.addEventListener('scroll', () => {
             }
             
             // Show navbar on scroll down, hide on scroll up
-            if (currentScrollY < lastScrollY && currentScrollY > 100) {
+            if (currentScrollY < lastScrollY && currentScrollY > scrollThreshold) {
                 // Scrolling up
                 nav.classList.add('nav-hidden');
-            } else if (currentScrollY > 100) {
+            } else if (currentScrollY > scrollThreshold) {
                 // Scrolling down
                 nav.classList.remove('nav-hidden');
             } else {
