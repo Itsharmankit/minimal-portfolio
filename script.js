@@ -16,6 +16,11 @@ if (typeof gsap === 'undefined') {
     // Remove loader to show content even if GSAP fails
     const loader = document.getElementById('loader');
     if (loader) loader.style.display = 'none';
+    document.querySelectorAll('.hero-tagline, .hero-animated-text, .hero-cta, .hero-name .line').forEach(el => {
+        el.style.opacity = '1';
+        el.style.visibility = 'visible';
+        el.style.transform = 'none';
+    });
     return;
 }
 
@@ -138,35 +143,37 @@ if (!prefersReducedMotion) {
 if (!isTouchDevice) {
     const cursor = document.getElementById('cursor');
     const follower = document.getElementById('cursorFollower');
-    
-    // Show cursors
-    cursor.style.display = 'block';
-    follower.style.display = 'block';
-    
-    let mx = 0, my = 0, fx = 0, fy = 0;
 
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    if (cursor && follower) {
+        // Show cursors
+        cursor.style.display = 'block';
+        follower.style.display = 'block';
 
-    (function tick() {
-        cursor.style.transform = `translate3d(${mx - 5}px,${my - 5}px,0)`;
-        fx += (mx - fx) * 0.12;
-        fy += (my - fy) * 0.12;
-        follower.style.transform = `translate3d(${fx - 18}px,${fy - 18}px,0)`;
-        requestAnimationFrame(tick);
-    })();
+        let mx = 0, my = 0, fx = 0, fy = 0;
 
-    document.querySelectorAll(
-        'a, button, .service-card, .project-item, .hero-role, .social-icon-btn, .skill-item, .section-header'
-    ).forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('expand');
-            follower.classList.add('expand');
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+        (function tick() {
+            cursor.style.transform = `translate3d(${mx - 5}px,${my - 5}px,0)`;
+            fx += (mx - fx) * 0.12;
+            fy += (my - fy) * 0.12;
+            follower.style.transform = `translate3d(${fx - 18}px,${fy - 18}px,0)`;
+            requestAnimationFrame(tick);
+        })();
+
+        document.querySelectorAll(
+            'a, button, .service-card, .project-item, .hero-role, .social-icon-btn, .skill-item, .section-header'
+        ).forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('expand');
+                follower.classList.add('expand');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('expand');
+                follower.classList.remove('expand');
+            });
         });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('expand');
-            follower.classList.remove('expand');
-        });
-    });
+    }
 }
 
 /* ── APPLY PARTICLE EFFECTS TO INTERACTIVE ELEMENTS ── */
@@ -614,6 +621,9 @@ function isValidEmail(email) {
 }
 
 function showFormStatus(message, type) {
+    if (!formStatus) {
+        return;
+    }
     formStatus.textContent = message;
     formStatus.className = `form-status form-status-${type}`;
 }
@@ -648,132 +658,6 @@ async function submitContactForm(data) {
         }
 
         throw error;
-    }
-}
-
-/* ── CUSTOM CURSOR WITH BACKGROUND COLOR DETECTION ── */
-const customCursor = document.querySelector('.custom-cursor');
-
-// Run on all devices (testing)
-if (customCursor) {
-    let cursorX = 0;
-    let cursorY = 0;
-    let currentX = 0;
-    let currentY = 0;
-    let lastColorState = null;
-    let wasOnTextOrImage = false;
-    let detectionTimeout = null;
-    
-    // Make cursor visible from start
-    customCursor.style.opacity = '1';
-    
-    // Track mouse movement
-    document.addEventListener('mousemove', (e) => {
-        cursorX = e.clientX;
-        cursorY = e.clientY;
-        
-        // Only trigger detection on mouse move, not constantly
-        if (detectionTimeout) clearTimeout(detectionTimeout);
-        detectionTimeout = setTimeout(detectCursorState, 10);
-    });
-    
-    // Smooth cursor animation with RAF
-    function animateCursor() {
-        currentX += (cursorX - currentX) * 0.15;
-        currentY += (cursorY - currentY) * 0.15;
-        
-        customCursor.style.left = currentX + 'px';
-        customCursor.style.top = currentY + 'px';
-        
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    
-    // Detect if hovering over text or images - SIMPLIFIED
-    function isTextOrImage(element) {
-        if (!element) return false;
-        
-        try {
-            const tagName = element.tagName;
-            // Direct text/image elements
-            if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'LI', 'BUTTON', 'IMG'].includes(tagName)) {
-                return true;
-            }
-            
-            // Check classes
-            const classes = element.className;
-            if (typeof classes === 'string' && (classes.includes('nav-pill-link') || classes.includes('hero-btn'))) {
-                return true;
-            }
-            
-            // Check parent only once
-            const parent = element.parentElement;
-            if (parent) {
-                if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'A', 'ARTICLE'].includes(parent.tagName)) {
-                    return true;
-                }
-            }
-        } catch (e) {}
-        
-        return false;
-    }
-    
-    // Get brightness - SIMPLIFIED
-    function getElementBrightness(element) {
-        if (!element) return 255;
-        
-        try {
-            let color = window.getComputedStyle(element).backgroundColor;
-            
-            // Fallback to text color if transparent
-            if (color === 'rgba(0, 0, 0, 0)' || color === 'transparent') {
-                color = window.getComputedStyle(element).color;
-            }
-            
-            const rgb = color.match(/\d+/g);
-            if (rgb && rgb.length >= 3) {
-                const r = parseInt(rgb[0]);
-                const g = parseInt(rgb[1]);
-                const b = parseInt(rgb[2]);
-                return (r * 299 + g * 587 + b * 114) / 1000;
-            }
-        } catch (e) {}
-        
-        return 255;
-    }
-    
-    // Detect cursor state
-    function detectCursorState() {
-        try {
-            const element = document.elementFromPoint(cursorX, cursorY);
-            if (!element) return;
-            
-            const isOnTextOrImage = isTextOrImage(element);
-            
-            // Update size
-            if (isOnTextOrImage !== wasOnTextOrImage) {
-                if (isOnTextOrImage) {
-                    customCursor.classList.add('grow');
-                } else {
-                    customCursor.classList.remove('grow');
-                }
-                wasOnTextOrImage = isOnTextOrImage;
-            }
-            
-            // Update color
-            const brightness = getElementBrightness(element);
-            const isDarkBackground = brightness < 140;
-            const newColorState = isDarkBackground ? 'dark' : 'light';
-            
-            if (lastColorState !== newColorState) {
-                if (isDarkBackground) {
-                    customCursor.classList.add('on-dark');
-                } else {
-                    customCursor.classList.remove('on-dark');
-                }
-                lastColorState = newColorState;
-            }
-        } catch (e) {}
     }
 }
 
