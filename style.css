@@ -447,35 +447,6 @@ nav {
     transition: background .3s, border-bottom .3s
 }
 
-.nav-toggle {
-    display: none;
-    width: 42px;
-    height: 42px;
-    border: 2px solid var(--black);
-    background: var(--white);
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    box-shadow: 3px 3px 0 0 var(--yellow);
-    transition: transform .2s ease, box-shadow .2s ease;
-    cursor: pointer
-}
-
-.nav-toggle:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 0 var(--yellow)
-}
-
-.nav-toggle-line {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--black);
-    border-radius: 2px;
-    transition: transform .25s ease, opacity .2s ease
-}
-
 .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 26px;
@@ -502,6 +473,12 @@ nav {
     border: 1px solid rgba(10, 10, 10, 0.10);
     border-radius: 14px;
     padding: 4px;
+    gap: 6px
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
     gap: 2px
 }
 
@@ -2575,94 +2552,70 @@ footer {
 /* ── MOBILE: 540px - 768px ── */
 @media(max-width:768px) {
     nav {
-        padding: 10px 16px;
-        min-height: 56px;
+        padding: 8px 14px;
+        min-height: 54px;
         justify-content: center;
-        flex-wrap: nowrap
+        align-items: center;
+        flex-wrap: nowrap;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 8px
     }
 
     .nav-logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 22px;
-        padding: 4px 10px
-    }
-
-    .nav-toggle {
-        display: inline-flex;
-        position: absolute;
-        right: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 34px;
-        height: 34px;
-        border-radius: 6px
+        font-size: 20px;
+        padding: 4px 8px;
+        margin: 0 auto
     }
 
     .nav-pill {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: min(72vw, 320px);
-        flex-direction: column;
-        align-items: stretch;
-        background: var(--white);
-        border-left: 2px solid var(--black);
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
-        padding: 88px 20px 24px;
+        background: transparent;
+        border: 0;
+        padding: 0;
         gap: 0;
-        opacity: 0;
-        transition: right .35s ease, opacity .25s ease;
-        z-index: 1001
+        display: contents
+    }
+
+    .nav-group {
+        gap: 10px
+    }
+
+    .nav-left {
+        justify-content: flex-start
+    }
+
+    .nav-right {
+        justify-content: flex-end
     }
 
     .nav-pill-link {
-        width: 100%;
-        padding: 10px 0;
+        width: auto;
+        padding: 0;
         font-size: 12px;
         letter-spacing: 1px;
-        border-radius: 0;
-        border-bottom: 1px solid #eee
+        border-radius: 0
     }
 
-    #mainNav.nav-open .nav-pill {
-        right: 0;
-        opacity: 1
+    .nav-pill-link[data-section="Home"] {
+        display: none
     }
 
-    #mainNav.nav-open::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.35);
-        z-index: 1000;
-        pointer-events: none
-    }
-
-    #mainNav.nav-open .nav-toggle-line:nth-child(1) {
-        transform: translateY(6px) rotate(45deg)
-    }
-
-    #mainNav.nav-open .nav-toggle-line:nth-child(2) {
-        opacity: 0
-    }
-
-    #mainNav.nav-open .nav-toggle-line:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg)
+    nav.scrolled {
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 6px 24px rgba(10, 10, 10, 0.12)
     }
 
     #Home {
-        padding: 84px 18px 56px;
-        gap: 28px
+        padding: 78px 16px 48px;
+        gap: 20px
     }
 
     .hero-image-wrapper {
         order: -1;
         margin-left: 0;
         justify-content: center;
-        margin-bottom: 10px
+        margin-bottom: 6px
     }
 
     .hero-image-box {
@@ -2673,7 +2626,7 @@ footer {
     .hero-content {
         align-items: center;
         text-align: center;
-        gap: 12px
+        gap: 10px
     }
 
     .hero-name {
@@ -2682,26 +2635,29 @@ footer {
 
     .hero-tagline {
         font-size: 12px;
-        line-height: 1.9;
-        margin-bottom: 8px
+        line-height: 1.85;
+        margin-bottom: 6px
     }
 
     .hero-animated-text {
         font-size: 10px;
         gap: 8px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         justify-content: center
     }
 
     .hero-cta {
+        width: 100%;
         justify-content: center;
-        gap: 10px
+        gap: 8px
     }
 
     .hero-btn {
         font-size: 10px;
-        padding: 10px 16px;
-        min-width: 120px
+        padding: 10px 12px;
+        min-width: 110px;
+        flex: 1;
+        max-width: 140px
     }
 
     .about-heading {
@@ -2731,11 +2687,15 @@ footer {
         display: flex;
         order: 0;
         min-height: auto;
-        margin-bottom: 18px
+        margin-bottom: 14px
     }
 
     .about-img-box {
-        height: 260px
+        height: 240px
+    }
+
+    .about-img-box video {
+        object-fit: contain
     }
 
     .about-stats {
@@ -2765,6 +2725,12 @@ footer {
         font-size: 10px
     }
 
+    .skills-title,
+    .section-title,
+    .contact-heading {
+        letter-spacing: 1.5px
+    }
+
     .section-heading {
         font-size: clamp(32px, 6vw, 44px)
     }
@@ -2789,7 +2755,7 @@ footer {
     }
 
     .section-header {
-        margin-bottom: 36px
+        margin-bottom: 28px
     }
 
     .services-grid {
@@ -2894,13 +2860,14 @@ footer {
     }
 
     nav {
-        padding: 8px 14px;
-        min-height: 52px
+        padding: 6px 12px;
+        min-height: 48px;
+        grid-template-columns: 1fr auto 1fr
     }
 
     .nav-logo {
-        font-size: 20px;
-        padding: 4px 9px;
+        font-size: 18px;
+        padding: 3px 7px;
         box-shadow: 2px 2px 0 0 var(--yellow)
     }
 
@@ -2908,24 +2875,16 @@ footer {
         box-shadow: 1px 1px 0 0 var(--yellow)
     }
 
-    .nav-toggle {
-        width: 32px;
-        height: 32px;
-        right: 14px
-    }
-
-    .nav-pill {
-        width: min(78vw, 300px);
-        padding: 78px 16px 20px
+    .nav-group {
+        gap: 8px
     }
 
     .nav-pill-link {
-        padding: 10px 0;
-        font-size: 11px
+        font-size: 10px
     }
 
     #Home {
-        padding: 78px 16px 52px
+        padding: 70px 14px 44px
     }
 
     .hero-name {
