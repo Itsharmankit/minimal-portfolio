@@ -440,7 +440,7 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 22px 48px;
+    padding: 16px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -454,12 +454,12 @@ nav.nav-hidden {
 
 .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: 2px;
     text-decoration: none;
     transition: color .3s, box-shadow .15s, transform .15s;
     border: 2px solid var(--black);
-    padding: 6px 14px;
+    padding: 5px 12px;
     box-shadow: 4px 4px 0 0 var(--yellow)
 }
 
@@ -477,7 +477,7 @@ nav.nav-hidden {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(10, 10, 10, 0.10);
     border-radius: 14px;
-    padding: 4px;
+    padding: 3px;
     gap: 6px
 }
 
@@ -491,7 +491,7 @@ nav.nav-hidden {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7px 18px;
+    padding: 6px 16px;
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
