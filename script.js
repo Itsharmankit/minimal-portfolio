@@ -253,14 +253,38 @@ addParticleEffect('.footer-social');       // Footer social icons
 const nav = document.getElementById('mainNav');
 const pillLinks = document.querySelectorAll('.nav-pill-link');
 
-// Frosted/shadow state on scroll
+// Frosted/shadow state on scroll + auto-hide on scroll down
+let lastScrollY = 0;
+let ticking = false;
+
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-        nav.classList.remove('hero-zone');
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.add('hero-zone');
-        nav.classList.remove('scrolled');
+    const currentScrollY = window.scrollY;
+    
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            // Add/remove scrolled class for styling
+            if (currentScrollY > 10) {
+                nav.classList.remove('hero-zone');
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.add('hero-zone');
+                nav.classList.remove('scrolled');
+            }
+            
+            // Hide navbar on scroll down, show on scroll up
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down
+                nav.classList.add('nav-hidden');
+            } else {
+                // Scrolling up
+                nav.classList.remove('nav-hidden');
+            }
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+        });
+        
+        ticking = true;
     }
 }, { passive: true });
 

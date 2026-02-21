@@ -444,7 +444,12 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background .3s, border-bottom .3s
+    transition: transform .3s ease, background .3s, border-bottom .3s;
+    transform: translateY(0)
+}
+
+nav.nav-hidden {
+    transform: translateY(-100%)
 }
 
 .nav-logo {
