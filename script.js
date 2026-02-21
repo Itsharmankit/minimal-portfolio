@@ -602,6 +602,16 @@ document.querySelectorAll(
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 const submitBtn = document.getElementById('submitBtn');
+const phoneInput = document.getElementById('phone');
+
+if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+        const digitsOnly = phoneInput.value.replace(/\D/g, '');
+        if (phoneInput.value !== digitsOnly) {
+            phoneInput.value = digitsOnly;
+        }
+    });
+}
 
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
