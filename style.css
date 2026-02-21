@@ -775,7 +775,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .hero-name {
     font-family: 'Sora', sans-serif;
-    font-size: clamp(42px, 7vw, 90px);
+    font-size: clamp(48px, 8vw, 120px);
     line-height: 1.1;
     letter-spacing: -2px;
     color: var(--black);
@@ -786,7 +786,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 /* "Hello, I'm" — light thin line */
 .hero-hello {
     font-family: 'Sora', sans-serif;
-    font-size: clamp(42px, 7vw, 90px);
+    font-size: clamp(48px, 8vw, 120px);
     font-weight: 300;
     color: var(--black);
     letter-spacing: -1px;
@@ -796,7 +796,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 /* "ANKIT Sharma" — heavy bold line */
 .hero-name-bold {
     font-family: 'Sora', sans-serif;
-    font-size: clamp(42px, 7vw, 90px);
+    font-size: clamp(48px, 8vw, 120px);
     font-weight: 800;
     color: var(--black);
     letter-spacing: -2px;
