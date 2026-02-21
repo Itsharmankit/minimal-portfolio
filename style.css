@@ -2570,7 +2570,8 @@ footer {
         left: 50%;
         transform: translateX(-50%);
         box-shadow: none;
-        border-width: 1.5px
+        border-width: 1.5px;
+        z-index: 5
     }
 
     .nav-logo:hover {
@@ -2597,7 +2598,7 @@ footer {
 
     .nav-left,
     .nav-right {
-        width: calc(50% - 28px)
+        flex: 1
     }
 
     .nav-left {
