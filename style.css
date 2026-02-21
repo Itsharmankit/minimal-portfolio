@@ -2768,17 +2768,21 @@ footer {
     }
 
     .section-label {
-        font-size: 10px
+        font-size: 10px;
+        color: var(--black);
+        opacity: 0.7
     }
 
     .skills-title,
     .section-title,
     .contact-heading {
-        letter-spacing: 1.5px
+        letter-spacing: 1.5px;
+        color: var(--black)
     }
 
     .section-heading {
-        font-size: clamp(32px, 6vw, 44px)
+        font-size: clamp(36px, 7vw, 48px);
+        color: var(--black)
     }
 
     .skills-grid {
@@ -3020,11 +3024,15 @@ footer {
 
     .section-label {
         font-size: 9px;
-        letter-spacing: 2px
+        letter-spacing: 2px;
+        color: var(--black);
+        opacity: 0.7
     }
 
     .section-heading {
-        font-size: clamp(28px, 7vw, 38px)
+        font-size: clamp(32px, 8vw, 42px);
+        color: var(--black);
+        font-weight: 600
     }
 
     .skills-inner {
