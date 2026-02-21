@@ -2573,6 +2573,10 @@ footer {
         transform: translateX(-50%);
         border: 2px solid var(--black);
         box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
         transition: color .3s, box-shadow .15s, transform .15s
     }
 
@@ -2603,12 +2607,12 @@ footer {
     }
 
     .nav-left {
-        width: calc(50% - 40px);
+        width: calc(50% - 65px);
         justify-content: flex-start
     }
 
     .nav-right {
-        width: calc(50% - 40px);
+        width: calc(50% - 65px);
         justify-content: flex-end
     }
 
