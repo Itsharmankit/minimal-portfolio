@@ -835,7 +835,7 @@ nav.scrolled .nav-pill-link:not(.active) {
 }
 
 .hero-name .line {
-    display: block;
+    display: inline;
     transform: translateY(80px);
     opacity: 0
 }
