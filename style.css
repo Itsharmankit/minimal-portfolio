@@ -2043,7 +2043,10 @@ nav.scrolled .nav-pill-link:not(.active) {
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden
+    overflow: hidden;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start
 }
 
 /* Contact section decorative circles - positioned in corners */
@@ -2130,7 +2133,8 @@ nav.scrolled .nav-pill-link:not(.active) {
     line-height: .95;
     letter-spacing: -2px;
     margin-bottom: 48px;
-    text-align: left
+    text-align: left;
+    width: 100%
 }
 
 .contact-heading em {
@@ -2141,9 +2145,10 @@ nav.scrolled .nav-pill-link:not(.active) {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    width: 100%
 }
 
 .contact-left {
